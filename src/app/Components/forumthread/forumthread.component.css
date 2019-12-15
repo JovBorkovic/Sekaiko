@@ -1,0 +1,49 @@
+.wide-container{
+    margin-right: 30%;
+    height: 100vh;
+}
+
+#T_Container {
+    min-height: 200px;
+}
+.T_Container{
+    padding: 10px 20px;
+}
+
+label.thread_title{
+    font-size: 28px;
+    font-weight: 600;
+}
+
+label.thread_status{
+    font-size:  15px;
+    font-family: 'Montserrat', monospace;
+}
+
+#status-check .material-icons{
+    font-size: 20px;
+}
+
+.T_Container > .row >  #Message{
+    font-size: 16px;
+}
+
+.threadNot {
+    width: 30%;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 1024px){
+    .wide-container{
+        margin-right: 0;
+    }
+}
+
+

@@ -1,0 +1,418 @@
+
+<!--Navigation menus-->
+  <!--Navigation menus-->
+  <nav>
+    <div class="row nav-wrapper DtBlack_BG">
+        <div class="col s4">
+            <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+<!-- naviagtion menu for desktop-->
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li class="activeNav"><a [routerLink]="['/home']" routerLinkActive="router"  >Home</a></li>
+                <li><a [routerLink]="['/art']" routerLinkActive="active"  >Art</a></li>
+                <li><a [routerLink]="['/forum']" routerLinkActive="active" >Forums</a></li>
+                <li><a [routerLink]="['/support']" routerLinkActive="active" >Contact</a></li>
+            </ul>
+<!--navigation menu for mobile-->
+            <ul id="mobile" class="side-nav">
+              <li class="activeNav"><a [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
+              <li><a [routerLink]="['/art']" routerLinkActive="active" >Art</a></li>
+              <li><a [routerLink]="['/forum']" routerLinkActive="active"  >Forums</a></li>
+              <li><a [routerLink]="['/support']" routerLinkActive="active"  >Contact</a></li>
+            </ul>
+        </div>
+<!--Sign up button-->
+        <div class="col s5 m3 l2 xl2 push-s3 push-m6 push-l5 push-xl5 center">
+            <a class="btn LPink_Text White_BG waves-effect waves-light modal-trigger" href="#modal1">Sign Up</a>
+        </div>
+<!--Account Login-->
+        <div class="col s2 m1 l1 xl1 right">
+            <div>
+                <a class="modal-trigger" data-target="modal2"><div><i class="material-icons LPink_Text">account_box</i></div></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--container that holds information between the nav and footer-->
+<!--Thakes the width of the entire screen-->
+<div class="wide-container">
+
+    <!--container that holds the hero image-->
+            <div>
+    <!--background image-->
+                <div class="image"></div>
+            </div>
+    
+            
+            
+    <!--container that holds contact links-->
+            <div class="container">
+    <!--Support form selection button-->
+                <div class="formSelectionContainer">
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12">
+                            <label class="contact-label LtBlue_Text">Support</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div>
+                                <a class="btn White_BG LPink_Text" [routerLink]="['/forum']" routerLinkActive="router-link-active" ><i class="material-icons left">forum</i>Check the forums</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div>
+                                <a id="supportEmail" class="btn White_BG LPink_Text"><i class="material-icons left">email</i>email us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <!--Suggestion form selection button-->
+                <div class="formSelectionContainer">
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12">
+                            <label class="contact-label LtBlue_Text">Send a suggestion</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12">
+                            <div>
+                                <a id="suggestionEmail" class="btn White_BG LPink_Text"><i class="material-icons left">email</i>we will look it through</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <!--Complaint form selection button-->
+                <div class="formSelectionContainer">
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12">
+                            <label class="contact-label LtBlue_Text">Do you have a complaint?</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l12 xl12">
+                            <div>
+                                <a id="complaintEmail" class="btn White_BG LPink_Text"><i class="material-icons left">email</i>Tell us though email</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+    <!--divider that seperates the buttons and the forms-->
+            <div class="divider"></div>
+            
+            
+            
+            
+    <!--Container that holds the forms-->
+            <div class="form-container">
+    <!--Support email form-->
+                <div id="supportForm" class="form Blue_BG White_Text hide">
+                    <div class="row">
+                        <form class="col s12">
+                            <legend class="formLegend">Email Support</legend>
+    <!--account name-->
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_box</i>
+                                    <input id="Support_AccName" type="text" class="validate">
+                                    <label for="Support_AccName">Account Name</label>
+                                </div>
+    <!--Email-->
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="Support_email" type="email" class="validate">
+                                    <label for="Support_email" data-error="wrong" data-success="right">Email</label>
+                                </div>
+                            </div>
+    <!--Select a topic-->
+                            <div class="row">
+                                <div class="col s12">
+                                    <label>Choose a topic</label>
+                                    <select class="browser-default">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Account</option>
+                                    <option value="2">Users</option>
+                                    <option value="3">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+    <!--Subject-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">subject</i>
+                                    <input id="Support_subject" type="text" class="validate">
+                                    <label for="Support_subject">Subject</label>
+                                </div>
+                            </div>
+    <!--textbox for message-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <textarea id="messageSupport" class="materialize-textarea"></textarea>
+                                    <label for="messageSupport">Message</label>
+                                </div>
+                            </div>
+    <!--submit button-->
+                            <div class="row">
+                                <button class="btn LtWhite_BG LtBlue_Text waves-effect waves-light right" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>    
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+    <!--Suggestion form-->
+                <div id="suggestionForm" class="form Blue_BG White_Text hide">
+                    <div class="row">
+                        <form class="col s12">
+                            <legend class="formLegend">Suggestion</legend>
+    <!--account name-->
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_box</i>
+                                    <input id="Suggestion_AccName" type="text" class="validate">
+                                    <label for="Suggestion_AccName">Account Name</label>
+                                </div>
+    <!--Email-->
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="Suggestion_email" type="email" class="validate">
+                                    <label for="Suggestion_email" data-error="wrong" data-success="right">Email</label>
+                                </div>
+                            </div>
+    <!--Subject-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">subject</i>
+                                    <input id="Suggestion_subject" type="text" class="validate">
+                                    <label for="Suggestion_subject">Subject</label>
+                                </div>
+                            </div>
+    <!--textbox for message-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <textarea id="Suggestion_message" class="materialize-textarea"></textarea>
+                                    <label for="Suggestion_message">Message</label>
+                                </div>
+                            </div>
+    <!--submit button-->
+                            <div class="row">
+                                <button class="btn LtWhite_BG LtBlue_Text waves-effect waves-light right" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>    
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                
+                
+    <!--Complaint form-->
+                <div id="complaintForm" class="form Blue_BG White_Text hide">
+                    <div class="row">
+                        <form class="col s12">
+                            <legend class="formLegend">Complaint</legend>
+    <!--account name-->
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_box</i>
+                                    <input id="Complaint_AccName" type="text" class="validate">
+                                    <label for="Complaint_AccName">Account Name</label>
+                                </div>
+    <!--Email-->
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="Complaint_email" type="email" class="validate">
+                                    <label for="Complaint_email" data-error="wrong" data-success="right">Email</label>
+                                </div>
+                            </div>
+    <!--Select a topic-->
+                            <div class="row">
+                                <div class="col s12">
+                                    <label>Choose a topic</label>
+                                    <select class="browser-default">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">I have experienced a bug</option>
+                                    <option value="2">User interaction</option>
+                                    <option value="3">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+    <!--Subject-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">subject</i>
+                                    <input id="Complaint_subject" type="text" class="validate">
+                                    <label for="Complaint_subject">Subject</label>
+                                </div>
+                            </div>
+    <!--textbox for message-->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <textarea id="Complaint_message" class="materialize-textarea"></textarea>
+                                    <label for="Complaint_message">Give us some more detail</label>
+                                </div>
+                            </div>
+    <!--submit button-->
+                            <div class="row">
+                                <button class="btn LtWhite_BG LtBlue_Text waves-effect waves-light right" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>    
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+        
+        
+        
+        
+    <!--
+    ============================================            Footer
+    -->
+        <!-- <footer class="page-footer DtBlack_BG">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="white-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3 modal-trigger" data-target="modal1">Sign Up</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Art</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Forums</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2018 Jovan Borkovic
+            <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
+            </div>
+          </div>
+        </footer> -->
+        
+        
+    <!-- 
+    ============================================     Sign up Modal Structure 
+    -->
+      <div id="modal1" class="modal center-align">
+    <!--Sign up form content -->
+        <div class="modal-content">
+          <h4>Sign Up</h4>
+              <div class="row">
+                <form class="col s12">
+    <!--Username input div-->
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="user_name" type="text" class="validate">
+                      <label for="user_name">Username</label>
+                    </div>
+                  </div>
+    <!--password input div-->
+                  <div class="row">
+                    <div class="input-field col s12 m6">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+    <!--confirm pass input div-->
+                    <div class="input-field col s12 m6">
+                      <input id="confirm_password" type="password" class="validate">
+                      <label for="confirm_password">Confirm Password</label>
+                    </div>
+                  </div>
+    <!--E-mail input div-->
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+    <!--          Modal footer(Sign-up buttons and so on)        -->
+        <div class="modal-footer">
+            <div class="center-align">
+                <a class="btn White_BG LPink_Text waves-effect waves-light" type="submit" name="action">Sign Up</a>
+            </div>
+            <div class="center-align">
+                <a class="modal-close btn">Close</a>
+            </div>
+        </div>
+      </div>
+        
+        
+    <!--
+    ============================================     Login Modal Structure 
+    -->
+      <div id="modal2" class="modal center-align">
+    <!--Login form-->
+        <div class="modal-content">
+          <i class="large material-icons">account_circle</i>
+              <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+    <!--Modal footer(Login buttons and so on)-->
+        <div class="modal-footer">
+            <div class="center-align">
+                <a class="btn White_BG LPink_Text waves-effect waves-light" type="submit" name="action">Login</a>
+            </div>
+            <div class="center-align">
+                <a class="modal-close btn">Close</a>
+            </div>
+        </div>
+      </div>
+    
+    
+    
+    
+    
+    
+    <!--   Import jQuery before materialize.js    -->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+    
+    <!--      Materialize javascript linking      -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    
+    <!--        Linking my own javascript         -->
+        <script src="js/script.js"></script>
+        <script src="js/contact.js"></script>

@@ -1,0 +1,228 @@
+
+  <!--Navigation menus-->
+  <nav>
+    <div class="row nav-wrapper DtBlack_BG">
+        <div class="col s4">
+            <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+<!-- naviagtion menu for desktop-->
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li class="activeNav"><a [routerLink]="['/home']" routerLinkActive="router"  >Home</a></li>
+                <li><a [routerLink]="['/art']" routerLinkActive="active"  >Art</a></li>
+                <li><a [routerLink]="['/forum']" routerLinkActive="active" >Forums</a></li>
+                <li><a [routerLink]="['/support']" routerLinkActive="active" >Contact</a></li>
+            </ul>
+<!--navigation menu for mobile-->
+            <ul id="mobile" class="side-nav">
+              <li class="activeNav"><a [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
+              <li><a [routerLink]="['/art']" routerLinkActive="active" >Art</a></li>
+              <li><a [routerLink]="['/forum']" routerLinkActive="active"  >Forums</a></li>
+              <li><a [routerLink]="['/support']" routerLinkActive="active"  >Contact</a></li>
+            </ul>
+        </div>
+<!--Sign up button-->
+        <div class="col s5 m3 l2 xl2 push-s3 push-m6 push-l5 push-xl5 center">
+          <a class="btn LPink_Text White_BG waves-effect waves-light modal-trigger" href="#modal1">Sign Up</a>
+        </div>
+<!--Account Login-->
+        <div class="col s2 m1 l1 xl1 right">
+            <div>
+              <a class="modal-trigger" href="#modal2"><div><i class="material-icons LPink_Text">account_box</i></div></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<!--container that holds information between the nav and footer-->
+<div class="container">
+<div id="main-threads" class="thread">
+    
+    <Label class="label LtBlue_Text">Main Threads</Label>
+    
+    <div class="row">
+        <div class="col s12">
+            <div class="collection">
+                <a [routerLink]="['/forumthread']" routerLinkActive="router-link-active"  class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="user-threads" class="thread">
+    
+    <Label class="label LtBlue_Text">User Threads</Label>
+    
+    <div class="row">
+        <div class="col s12">
+            <div class="collection">
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+            </div>
+        </div>
+    </div>
+    <div class="pagination center">
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+<!--
+============================================            Footer
+-->
+<!-- <footer class="page-footer DtBlack_BG">
+<div class="container">
+<div class="row">
+  <div class="col l6 s12">
+    <h5 class="white-text">Footer Content</h5>
+    <p class="white-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+  </div>
+  <div class="col l4 offset-l2 s12">
+    <h5 class="white-text">Links</h5>
+    <ul>
+      <li><a class="grey-text text-lighten-3 modal-trigger" data-target="modal1">Sign Up</a></li>
+      <li><a class="grey-text text-lighten-3" href="#!">Art</a></li>
+      <li><a class="grey-text text-lighten-3" href="#!">Forums</a></li>
+      <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+      <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+<div class="footer-copyright">
+<div class="container">
+© 2018 Jovan Borkovic
+<a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
+</div>
+</div>
+</footer> -->
+
+
+<!-- 
+============================================     Sign up Modal Structure 
+-->
+<div id="modal1" class="modal center-align">
+<!--Sign up form content -->
+<div class="modal-content">
+<h4>Sign Up</h4>
+  <div class="row">
+    <form class="col s12">
+<!--Username input div-->
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="user_name" type="text" class="validate">
+          <label for="user_name">Username</label>
+        </div>
+      </div>
+<!--password input div-->
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+<!--confirm pass input div-->
+        <div class="input-field col s12 m6">
+          <input id="confirm_password" type="password" class="validate">
+          <label for="confirm_password">Confirm Password</label>
+        </div>
+      </div>
+<!--E-mail input div-->
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--          Modal footer(Sign-up buttons and so on)        -->
+<div class="modal-footer">
+<div class="center-align">
+    <a class="btn LPink_Text White_BG waves-effect waves-light" type="submit" name="action">Sign Up</a>
+</div>
+<div class="center-align">
+    <a class="modal-close btn">Close</a>
+</div>
+</div>
+</div>
+
+
+<!--
+============================================     Login Modal Structure 
+-->
+<div id="modal2" class="modal center-align">
+<!--Login form-->
+<div class="modal-content">
+<i class="large material-icons">account_circle</i>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--Modal footer(Login buttons and so on)-->
+<div class="modal-footer">
+<div class="center-align">
+    <a class="btn LPink_Text White_BG waves-effect waves-light" type="submit" name="action">Login</a>
+</div>
+<div class="center-align">
+    <a class="modal-close btn">Close</a>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<!--   Import jQuery before materialize.js    -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+
+<!--      Materialize javascript linking      -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<!--        Linking my own javascript         -->
+<script src="js/script.js"></script>

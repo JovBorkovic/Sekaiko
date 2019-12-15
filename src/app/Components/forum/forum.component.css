@@ -1,0 +1,20 @@
+.label{
+    font-size: 24px;
+}
+
+.thread{
+    padding: 5% 0;
+}
+
+
+.collection:hover .collection-item:not(:hover){
+    animation: slide 1s forwards;
+}
+/*
+====================   Animation
+*/
+
+@keyframes slide {
+    50% {transform: translate(50px);}
+    100% {transform: translate(20px);}
+}

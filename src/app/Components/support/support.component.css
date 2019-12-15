@@ -1,0 +1,85 @@
+.image{
+    background: url(https://images7.alphacoders.com/671/thumb-1920-671281.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 600px;
+    padding: 0;
+    margin: 0;
+}
+
+.wide-container{
+    width: 100%;
+    height: 100%;
+}
+
+.formSelectionContainer{
+    width: 32%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+}
+.formSelectionContainer .current{
+    background-color: #DC458A !important;
+    color: #FFF !important;
+}
+
+.wide-container .container {
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-label{
+    font-size: 25px;
+}
+
+
+/*form container settings*/
+.form-container{
+    width: 60%;
+    margin: 1% auto;
+}
+/*form settings*/
+.form{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.formLegend{
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+.form label{
+    color: #FFF;
+}
+/*edit browser default class from select html element*/
+select[class="browser-default"]{
+    border: 0px none;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-weight: 600;
+}
+/*option setting from dropdown*/
+select[class="browser-default"] option{
+    color: #548ACB;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

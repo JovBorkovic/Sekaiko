@@ -1,0 +1,40 @@
+/*id's*/
+
+/*search bar editing*/
+#search{
+    border-color: #FFF;
+}
+
+
+
+/*Filter container*/
+.filter-container{
+    width: 100%;
+    height: auto;
+}
+
+.filterLabel{
+    font-size: 15px;
+}
+
+/*Divider that divides content*/
+.divider{
+    margin: 2%;
+}
+
+/*Collapsible element editing*/
+.collapsible-header{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.collapsible-body{
+    padding: 1.5%;
+}
+
+
+
+/*containes the entirety of the space between the footer and nav*/
+.wide-container{
+    width: 100%;
+}
