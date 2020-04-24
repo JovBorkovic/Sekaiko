@@ -1,0 +1,28 @@
+  <!--Navigation menus-->
+  <nav>
+    <div class="row nav-wrapper DtBlack_BG">
+        <div class="col s4">
+            <a href="#" data-target="mobile" class="button-collapse sidenav-trigger"><i class="material-icons">menu</i></a>
+<!-- naviagtion menu for desktop-->
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a [routerLink]="['/home']" routerLinkActive="router"  >Home</a></li>
+                <li><a [routerLink]="['/art']" routerLinkActive="active"  >Art</a></li>
+                <li><a [routerLink]="['/forum']" routerLinkActive="active" >Forums</a></li>
+                <li><a [routerLink]="['/support']" routerLinkActive="active" >Contact</a></li>
+            </ul>
+<!--navigation menu for mobile-->
+            <ul id="mobile" class="sidenav">
+              <li><a [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
+              <li><a [routerLink]="['/art']" routerLinkActive="active" >Art</a></li>
+              <li><a [routerLink]="['/forum']" routerLinkActive="active"  >Forums</a></li>
+              <li><a [routerLink]="['/support']" routerLinkActive="active"  >Contact</a></li>
+            </ul>
+        </div>
+        <!--Sign up button-->
+        <div class="col s5 m3 l2 xl2 push-s3 push-m6 push-l5 push-xl5 center">
+          <a class="btn LPink_Text White_BG waves-effect waves-light modal-trigger" href="#modal1">Sign Up</a>
+        </div>
+        <!--login/user button-->
+        <app-user></app-user>
+    </div>
+</nav>

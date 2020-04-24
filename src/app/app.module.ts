@@ -9,6 +9,14 @@ import { ForumComponent } from './Components/forum/forum.component';
 import { SupportComponent } from './Components/support/support.component';
 import { ForumthreadComponent } from './Components/forumthread/forumthread.component';
 import { AccHomeComponent } from './Components/acc-home/acc-home.component';
+import { ImageComponent } from './components/image/image.component';
+import { NewestComponent } from './Components/image/newest/newest.component';
+import { ModalsComponent } from './components/modals/modals.component';
+import { UserComponent } from './Components/navbar/user/user.component';
+import { UserImageComponent} from './Components/navbar/user/user-image/user-image.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ParallaxComponent } from './components/parallax/parallax.component';
+import { ArtFilterComponent } from './components/art/art-filter/art-filter.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +26,15 @@ import { AccHomeComponent } from './Components/acc-home/acc-home.component';
     ForumComponent,
     SupportComponent,
     ForumthreadComponent,
-    AccHomeComponent
+    AccHomeComponent,
+    NewestComponent,
+    ImageComponent,
+    ModalsComponent,
+    UserComponent,
+    UserImageComponent,
+    NavbarComponent,
+    ParallaxComponent,
+    ArtFilterComponent
   ],
   imports: [
     BrowserModule,

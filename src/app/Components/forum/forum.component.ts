@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import * as M from 'materialize-css';
+declare var $: any;
 
 @Component({
   selector: 'app-forum',

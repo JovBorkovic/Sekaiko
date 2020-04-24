@@ -1,0 +1,21 @@
+a {
+    cursor: pointer;
+}
+
+
+/*
+======================      Max screen width 1024px laptop size    =================
+*/
+@media only screen and (max-width: 1024px){
+/*  classes   */
+    
+    nav i.material-icons{
+        font-size: 30px; /*this changes the size of the icon on the nav*/
+    }
+    
+/*Modal*/
+    .modal{
+        height: 80% !important;
+        width: 50% !important;
+    }
+}
