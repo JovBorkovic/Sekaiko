@@ -255,8 +255,6 @@ label for sections on acc page
 seperate from the background image container for the users name
 */
     .acc-body{
-        width: auto;
-        height: 800px;
         display:inline;
     }
     .holder{

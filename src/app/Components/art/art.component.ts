@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import * as M from 'materialize-css';
+declare var $: any;
 
 @Component({
   selector: 'app-art',
@@ -11,12 +12,10 @@ export class ArtComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
-  ngAfterViewInit(){
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    
+    $(document).ready(() => {
+      $('.collapsible').collapsible();
+    });
   }
 
 }

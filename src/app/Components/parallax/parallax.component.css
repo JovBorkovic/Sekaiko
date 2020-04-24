@@ -1,0 +1,57 @@
+/*
+---------------------      parallax customization
+*/
+.parallax {
+    /* The image used */
+    background-image:url('../../../images/Flooded_Hangar.jpg');
+
+    /* Full height */
+    height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*
+the overlapping element on the parallax
+*/
+.parallax .overLap{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.6);
+    margin: auto;
+    position: relative;
+}
+/*
+Customization of button on
+*/
+.parallax .overLap .btn.LPink_Text.White_BG{
+    position: absolute;
+    bottom: 30px;
+    left: 47%;
+    height: 60px;
+    padding: 15px 30px;
+}
+
+
+
+@media only screen and (max-width: 320px){
+    .parallax{
+        height: 300px !important;
+    }
+}
+    
+
+/*
+======================      Max screen width 1024px laptop size    =================
+*/
+@media only screen and (max-width: 1024px){
+    /*  classes   */
+    
+    /*Parallax*/
+    .parallax{
+        height: 400px;
+    }
+}    
