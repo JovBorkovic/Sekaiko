@@ -11,8 +11,9 @@ const route: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'art', component: ArtComponent },
-  { path: 'forum', component: ForumComponent },
-  { path: 'forumthread', component: ForumthreadComponent },
+  { path: 'forum', component: ForumComponent, children: [
+    { path: 'forumthread', component: ForumthreadComponent }
+   ] },
   { path: 'support', component: SupportComponent },
   { path: 'acc-home', component: AccHomeComponent }
 ];

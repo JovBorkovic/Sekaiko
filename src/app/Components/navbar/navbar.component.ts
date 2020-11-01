@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-declare var $: any;
+import { Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,16 +8,6 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-    $(document).ready(() => {
-      $('.modal').modal();
-    });
-    
-    $(document).ready(() => {
-      $('.sidenav').sidenav();
-    });
-  }
+  ngOnInit() {}
 
 }

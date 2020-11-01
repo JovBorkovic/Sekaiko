@@ -3,223 +3,223 @@
 ===================================     Font style
 */
 .Monsterrat{
-    font-family: 'Montserrat', sans-serif;
-}
-
-/*
-====================================       Colors
-
-Blue Colors
-
-
-Lightest Blue color  =  #45429E,
-Light blue color     =  #2A2694,
-blue color           =  #1C187A,
-darker blue color    =  #100D65,
-darkest blue color   =  #09064B,
-
-
-Yellow colors
-
-Lightest yellow color  =  #E3BE48,
-Light yellow color     =  #D4A81C,
-yellow color           =  #AF880B,
-darker yellow color    =  #916E00,
-darkest yellow color   =  #6B5200,
-*/
-
-/*
--------------      background  Colors
-*/
-/*
-    Blue BG
-*/
-.LtBlue_BG{
-     background-color: #9FC0E7 !important;
-}
-.LBlue_BG{
-     background-color: #548ACB !important;
-}
-.Blue_BG{
-     background-color: #2469BB !important;
-}
-.DBlue_BG{
-     background-color: #0A4790 !important;
-}
-.DtBlue_BG{
-     background-color: #052D5E !important;
-}
-
-/*
-    Black BG
-*/
-.LtBlack_BG{
-     background-color: #323231 !important;
-}
-.LBlack_BG{
-     background-color: #1B1B1A !important;
-}
-.Black_BG{
-     background-color: #0F0E0E !important;
-}
-.DBlack_BG{
-     background-color: #0D0D0D !important;
-}
-.DtBlack_BG{
-     background-color: #070706 !important;
-}
-
-/*
-    Pink BG
-*/
-.LtPink_BG{
-     background-color: #E76BA3 !important;
-}
-.LPink_BG{
-     background-color: #DC458A !important;
-}
-.Pink_BG{
-     background-color: #D02372 !important;
-}
-.DPink_BG{
-     background-color: #AD0A54 !important;
-}
-.DtPink_BG{
-     background-color: #88003E !important;
-}
-
-/*
-    White BG
-*/
-.LtWhite_BG{
-     background-color: #ECE3DE !important;
-}
-.LWhite_BG{
-     background-color: #FFF7F3 !important;
-}
-.White_BG{
-     background-color: #FFFAF8 !important;
-}
-.DWhite_BG{
-     background-color: #FFE2D3 !important;
-}
-.DtWhite_BG{
-     background-color: #DFB8A3 !important;
-}
-
-
-
-
-
-/*
---------------------   Text Colors
-*/
-/*
-    Blue Text
-*/
-.LtBlue_Text{
-      color: #9FC0E7 !important;
-}
-.LBlue_Text{
-      color: #548ACB !important;
-}
-.Blue_Text{
-      color: #2469BB !important;
-}
-.DBlue_Text{
-      color: #0A4790 !important;
-}
-.DtBlue_Text{
-      color: #052D5E !important;
-}
-
-/*
-    Black Text
-*/
-.LtBlack_Text{
-      color: #323231 !important;
-}
-.LBlack_Text{
-      color: #1B1B1A !important;
-}
-.Black_Text{
-      color: #0F0E0E !important;
-}
-.DBlack_Text{
-      color: #0D0D0D !important;
-}
-.DtBlack_Text{
-      color: #070706 !important;
-}
-
-/*
-    Pink Text
-*/
-.LtPink_Text{
-     color: #E76BA3 !important;
-}
-.LPink_Text{
-     color: #DC458A !important;
-}
-.Pink_Text{
-     color: #D02372 !important;
-}
-.DPink_Text{
-     color: #AD0A54 !important;
-}
-.DtPink_Text{
-     color: #88003E !important;
-}
-
-/*
-    White Text
-*/
-.LtWhite_Text{
-      color: #ECE3DE !important;
-}
-.LWhite_Text{
-      color: #FFF7F3 !important;
-}
-.White_Text{
-      color: #FFFAF8 !important;
-}
-.DWhite_Text{
-      color: #FFE2D3 !important;
-}
-.DtWhite_Text{
-      color: #DFB8A3 !important;
-}
-
-
-
-
-.color-primary-0 { color: #323231 }	/* Main Primary color */
-.color-primary-1 { color: #0F0E0E }
-.color-primary-2 { color: #1B1B1A }
-.color-primary-3 { color: #0D0D0D }
-.color-primary-4 { color: #070706 }
-
-.color-secondary-1-0 { color: #9D8330 }	/* Main Secondary color (1) */
-.color-secondary-1-1 { color: #FFE389 }
-.color-secondary-1-2 { color: #DDC05E }
-.color-secondary-1-3 { color: #5E4C12 }
-.color-secondary-1-4 { color: #231B02 }
-
-.color-secondary-2-0 { color: #FFFAF8 }	/* Main Secondary color (2) */
-.color-secondary-2-1 { color: #DFB8A3 }
-.color-secondary-2-2 { color: #FFE2D3 }
-.color-secondary-2-3 { color: #FFF7F3 }
-.color-secondary-2-4 { color: #ECE3DE }
-
-.color-complement-0 { color: #0F4174 }	/* Main Complement color */
-.color-complement-1 { color: #0F4E90 }
-.color-complement-2 { color: #104781 }
-.color-complement-3 { color: #0E3A69 }
-.color-complement-4 { color: #0A335C }
-
-
-.color-primary-0 { color: #2469BB }	/* Main Primary color */
-.color-primary-1 { color: #9FC0E7 }
-.color-primary-2 { color: #548ACB }
-.color-primary-3 { color: #0A4790 }
-.color-primary-4 { color: #052D5E }
+     font-family: 'Montserrat', sans-serif;
+ }
+ 
+ /*
+ ====================================       Colors
+ 
+ Blue Colors
+ 
+ 
+ Lightest Blue color  =  #45429E,
+ Light blue color     =  #2A2694,
+ blue color           =  #1C187A,
+ darker blue color    =  #100D65,
+ darkest blue color   =  #09064B,
+ 
+ 
+ Yellow colors
+ 
+ Lightest yellow color  =  #E3BE48,
+ Light yellow color     =  #D4A81C,
+ yellow color           =  #AF880B,
+ darker yellow color    =  #916E00,
+ darkest yellow color   =  #6B5200,
+ */
+ 
+ /*
+ -------------      background  Colors
+ */
+ /*
+     Blue BG
+ */
+ .LtBlue_BG{
+      background-color: #9FC0E7 !important;
+ }
+ .LBlue_BG{
+      background-color: #548ACB !important;
+ }
+ .Blue_BG{
+      background-color: #2469BB !important;
+ }
+ .DBlue_BG{
+      background-color: #0A4790 !important;
+ }
+ .DtBlue_BG{
+      background-color: #052D5E !important;
+ }
+ 
+ /*
+     Black BG
+ */
+ .LtBlack_BG{
+      background-color: #323231 !important;
+ }
+ .LBlack_BG{
+      background-color: #1B1B1A !important;
+ }
+ .Black_BG{
+      background-color: #0F0E0E !important;
+ }
+ .DBlack_BG{
+      background-color: #0D0D0D !important;
+ }
+ .DtBlack_BG{
+      background-color: #070706 !important;
+ }
+ 
+ /*
+     Pink BG
+ */
+ .LtPink_BG{
+      background-color: #E76BA3 !important;
+ }
+ .LPink_BG{
+      background-color: #DC458A !important;
+ }
+ .Pink_BG{
+      background-color: #D02372 !important;
+ }
+ .DPink_BG{
+      background-color: #AD0A54 !important;
+ }
+ .DtPink_BG{
+      background-color: #88003E !important;
+ }
+ 
+ /*
+     White BG
+ */
+ .LtWhite_BG{
+      background-color: #ECE3DE !important;
+ }
+ .LWhite_BG{
+      background-color: #FFF7F3 !important;
+ }
+ .White_BG{
+      background-color: #FFFAF8 !important;
+ }
+ .DWhite_BG{
+      background-color: #FFE2D3 !important;
+ }
+ .DtWhite_BG{
+      background-color: #DFB8A3 !important;
+ }
+ 
+ 
+ 
+ 
+ 
+ /*
+ --------------------   Text Colors
+ */
+ /*
+     Blue Text
+ */
+ .LtBlue_Text{
+       color: #9FC0E7 !important;
+ }
+ .LBlue_Text{
+       color: #548ACB !important;
+ }
+ .Blue_Text{
+       color: #2469BB !important;
+ }
+ .DBlue_Text{
+       color: #0A4790 !important;
+ }
+ .DtBlue_Text{
+       color: #052D5E !important;
+ }
+ 
+ /*
+     Black Text
+ */
+ .LtBlack_Text{
+       color: #323231 !important;
+ }
+ .LBlack_Text{
+       color: #1B1B1A !important;
+ }
+ .Black_Text{
+       color: #0F0E0E !important;
+ }
+ .DBlack_Text{
+       color: #0D0D0D !important;
+ }
+ .DtBlack_Text{
+       color: #070706 !important;
+ }
+ 
+ /*
+     Pink Text
+ */
+ .LtPink_Text{
+      color: #E76BA3 !important;
+ }
+ .LPink_Text{
+      color: #DC458A !important;
+ }
+ .Pink_Text{
+      color: #D02372 !important;
+ }
+ .DPink_Text{
+      color: #AD0A54 !important;
+ }
+ .DtPink_Text{
+      color: #88003E !important;
+ }
+ 
+ /*
+     White Text
+ */
+ .LtWhite_Text{
+       color: #ECE3DE !important;
+ }
+ .LWhite_Text{
+       color: #FFF7F3 !important;
+ }
+ .White_Text{
+       color: #FFFAF8 !important;
+ }
+ .DWhite_Text{
+       color: #FFE2D3 !important;
+ }
+ .DtWhite_Text{
+       color: #DFB8A3 !important;
+ }
+ 
+ 
+ 
+ 
+ .color-primary-0 { color: #323231 }	/* Main Primary color */
+ .color-primary-1 { color: #0F0E0E }
+ .color-primary-2 { color: #1B1B1A }
+ .color-primary-3 { color: #0D0D0D }
+ .color-primary-4 { color: #070706 }
+ 
+ .color-secondary-1-0 { color: #9D8330 }	/* Main Secondary color (1) */
+ .color-secondary-1-1 { color: #FFE389 }
+ .color-secondary-1-2 { color: #DDC05E }
+ .color-secondary-1-3 { color: #5E4C12 }
+ .color-secondary-1-4 { color: #231B02 }
+ 
+ .color-secondary-2-0 { color: #FFFAF8 }	/* Main Secondary color (2) */
+ .color-secondary-2-1 { color: #DFB8A3 }
+ .color-secondary-2-2 { color: #FFE2D3 }
+ .color-secondary-2-3 { color: #FFF7F3 }
+ .color-secondary-2-4 { color: #ECE3DE }
+ 
+ .color-complement-0 { color: #0F4174 }	/* Main Complement color */
+ .color-complement-1 { color: #0F4E90 }
+ .color-complement-2 { color: #104781 }
+ .color-complement-3 { color: #0E3A69 }
+ .color-complement-4 { color: #0A335C }
+ 
+ 
+ .color-primary-0 { color: #2469BB }	/* Main Primary color */
+ .color-primary-1 { color: #9FC0E7 }
+ .color-primary-2 { color: #548ACB }
+ .color-primary-3 { color: #0A4790 }
+ .color-primary-4 { color: #052D5E }

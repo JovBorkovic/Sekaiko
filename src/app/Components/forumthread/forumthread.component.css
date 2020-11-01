@@ -1,6 +1,6 @@
 .wide-container{
     margin-right: 30%;
-    height: 100vh;
+    height: 20000px;
 }
 
 .T_Container{
@@ -33,15 +33,8 @@ label.thread_status{
     top: 0;
 }
 
-
-
-
-
-
 @media only screen and (max-width: 1024px){
     .wide-container{
         margin-right: 0;
     }
 }
-
-

@@ -7,56 +7,30 @@ declare var $: any;
   templateUrl: './forumthread.component.html',
   styleUrls: ['./forumthread.component.css']
 })
-export class ForumthreadComponent implements OnInit , AfterViewInit{
+export class ForumthreadComponent implements OnInit, AfterViewInit {
 
   constructor() {}
 
-  ngOnInit() {
-    }
+  ngOnInit() {}
 
-    ngAfterViewInit() {
-        $().ready(() => {
-            $.fn.isOnScreen = () => {
-                const win = $(window);
-                const viewport = {
-                    top : win.scrollTop(),
-                    left : win.scrollLeft(),
-                    right: win,
-                    bottom: win
-                };
-                viewport.right = viewport.left + win.width();
-                viewport.bottom = viewport.top + win.height();
-                const bounds = globalThis.offset();
-                bounds.right = bounds.left + globalThis.outerWidth;
-                bounds.bottom = bounds.top + globalThis.outerHeight;
-                return (!(viewport.right < bounds.left
-                    || viewport.left > bounds.right
-                    || viewport.bottom < bounds.top
-                    || viewport.top > bounds.bottom));
-            };
-            const TContainer = $('#T_Container');
-            $(window).scroll(() => {
-                if ($(window).width() > 1024) {
-                    if ($('.T_Container').length > 0) {
-                        if ($('.T_Container').isOnScreen() === false) {
-                            TContainer.addClass('threadNot');
-                            TContainer.removeClass('T_Container');
-                        }
-                    }
-                    if ($('.threadNot').length > 0) {
-                        if ($(window).scrollTop() <= 64) {
-                            TContainer.removeClass('threadNot');
-                            TContainer.addClass('T_Container');
-                        }
-                    }
-                } else {
-                    TContainer.removeClass('T_Container');
-                    TContainer.removeClass('threadNot');
-                    TContainer.addClass('T_Container');
-                }
-            });
+  ngAfterViewInit() {
+    $( () => {
+        $(window).scroll(() => {
+            const scroll = $(window).scrollTop(); // how many pixels you've scrolled
+            const os = $('#T_Container').offset().top; // pixels to the top of div1
+            const ht = $('#T_Container').height(); // height of div1 in pixels
+            // if you've scrolled further than the top of div1 plus it's height
+            // change the color. either by adding a class or setting a css property
+            if (scroll > os + ht) {
+                $('#T_Container').addClass('threadNot');
+                $('#T_Container').removeClass('T_Container');
+            } else if (scroll < ht) {
+              $('#T_Container').addClass('T_Container');
+              $('#T_Container').removeClass('threadNot');
+            }
         });
-    }
+    });
+  }
 }
 
 
