@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  @Input() isAuthenticated: boolean;
+  @Output() isLoggingOut = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  emitLogout() {
+    this.isLoggingOut.emit();
   }
 
 }

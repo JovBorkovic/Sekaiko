@@ -6,14 +6,7 @@
 }
 
 
-
-/*Filter container*/
-.filter-container{
-    width: 100%;
-    height: auto;
-}
-
-.filterLabel{
+.filter-label{
     font-size: 15px;
 }
 
@@ -30,11 +23,4 @@
 
 .collapsible-body{
     padding: 1.5%;
-}
-
-
-
-/*containes the entirety of the space between the footer and nav*/
-.wide-container{
-    width: 100%;
 }

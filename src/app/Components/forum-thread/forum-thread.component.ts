@@ -3,9 +3,9 @@ import * as M from 'materialize-css';
 declare var $: any;
 
 @Component({
-  selector: 'app-forumthread',
-  templateUrl: './forumthread.component.html',
-  styleUrls: ['./forumthread.component.css']
+  selector: 'app-forum-thread',
+  templateUrl: './forum-thread.component.html',
+  styleUrls: ['./forum-thread.component.css']
 })
 export class ForumthreadComponent implements OnInit, AfterViewInit {
 

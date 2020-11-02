@@ -1,17 +1,21 @@
-<div class="user">
-    <div class="col s1 m1 l1 xl1 pull-s1 right">
+<div id="user">
+    <div class="col-sm-1 " *ngIf="!isAuthenticated">
         <a class="modal-trigger" href="#modal2"><i class="material-icons LPink_Text">account_box</i></a>
     </div>
-    <div class="userinfohover hide">
-        <div class="row">
-            <div class="col s1 m1 l1 xl1 pull-s1 right">
+    <div id="user-info" class="userinfohover" *ngIf="isAuthenticated" ngbDropdown>
+        <div class="row m-0 p-0" ngbDropdownToggle id="dropdownUser">
+            <div class="col-1">
                 <app-user-image></app-user-image>
             </div>
-            <div class="col s12">
-                <h3 class="name green">
+            <div class="col">
+                <p id="username" class="green p-0">
                     Jovan Borkovic
-                </h3>
+                </p>
             </div>
+        </div>
+
+        <div ngbDropdownMenu aria-labelledby="dropdownUser">
+            <button ngbDropdownItem (click)="emitLogout()"> Logout </button>
         </div>
     </div>
 </div>

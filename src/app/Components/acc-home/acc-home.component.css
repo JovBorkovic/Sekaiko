@@ -1,8 +1,3 @@
-.wide-container{
-    width: 100%;
-}
-
-
 /*
 ====================================             Parallax Background Container
 */
@@ -27,7 +22,7 @@ parallax-container animation class
 .parallax{
     /* The image used */
     /*https://www.hdwallpapers.in/walls/mr_robot_hd_4k_8k-HD.jpg*/
-    background-image:url('../../../images/mr_robot.jpg');
+    background-image:url('../../../images/Flooded_Hangar.jpg');
     
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -128,8 +123,6 @@ label for sections on acc page
 .holder{
     width: 75%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 .acc-body .section{
     max-width: 100%;

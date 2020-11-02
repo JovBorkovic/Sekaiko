@@ -7,16 +7,20 @@ import { HomeComponent } from './Components/home/home.component';
 import { ArtComponent } from './Components/art/art.component';
 import { ForumComponent } from './Components/forum/forum.component';
 import { SupportComponent } from './Components/support/support.component';
-import { ForumthreadComponent } from './Components/forumthread/forumthread.component';
+import { ForumthreadComponent } from './Components/forum-thread/forum-thread.component';
 import { AccHomeComponent } from './Components/acc-home/acc-home.component';
 import { UserComponent } from './Components/navbar/user/user.component';
 import { UserImageComponent} from './Components/navbar/user/user-image/user-image.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './Components/navbar/nav-bar.component';
 import { ParallaxComponent } from './components/parallax/parallax.component';
 import { ArtFilterComponent } from './components/art/art-filter/art-filter.component';
-import { FormsComponent } from './components/forms/forms.component';
-import { SignupComponent } from './components/forms/signup/signup.component';
-import { LoginComponent } from './components/forms/login/login.component';
+import { AuthComponent } from './Components/auth/auth.component';
+import { LoadingSpinnerComponent } from './Components/shared/loading-spinner/loading-spinner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './Components/auth/auth.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './Components/auth/auth-interceptor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -32,15 +36,21 @@ import { LoginComponent } from './components/forms/login/login.component';
     NavbarComponent,
     ParallaxComponent,
     ArtFilterComponent,
-    FormsComponent,
-    SignupComponent,
-    LoginComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

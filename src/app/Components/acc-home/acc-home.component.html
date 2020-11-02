@@ -1,25 +1,14 @@
-<!--Nav link routing-->
-<app-navbar></app-navbar>
 
-<!--
-==========================================================          This container takes up the entire window.
--->
-<div class="wide-container">
-<!--
------------------------------         Parallax image container.
--->
     <div class="parallax-container z-depth-1">
         <div class="parallax">
-<!--
-Container holding Account Name and Image.
--->
             <div>
                 <div class="acc-name-bg">
                     <div class="acc-name left White_Text"><i class="material-icons left">account_circle</i>Jovan Borkovic</div>
                 </div>
             </div>
-<!--
-Container holding tabs selections.
+
+<!--        
+===       Tabs for the mobile screen size
 -->
             <div>
                 <div class="tab-links">
@@ -39,9 +28,6 @@ Container holding tabs selections.
             </div>
         </div>
     </div>
-<!--        
-=========================================================         Tabs for the mobile screen size
--->
     <div class="tabs-mobile">
         <div class="tab current" data-tab="tab-home">
                 <i class="material-icons LPink_Text">home</i>
@@ -57,32 +43,17 @@ Container holding tabs selections.
         </div>
     </div>        
 <!--
-================================================================       Account body
+=======   Account body
 -->
     <div class="acc-body">
-<!--
----------------------------     Main display for the tabs
--->
-<!--
-The current information display is the default for when the
-account is accessed
--->
         <div class="holder">
-<!--
-----------------    Home tab-content
--->
             <div id="tab-home" class="tab-content current">
-<!--
-This is the section that holds the uploads
--->
                 <div class="section">
                     <div class="Uploads">
                         <label class="label LtBlue_Text">Uploads</label>
                     </div>
                 </div>
-<!--
-This is the section that displays and holds the group information
--->
+
                 <div class="section">
                     <div class="group">
                         <label class="label LtBlue_Text">Group Activity</label>
@@ -93,9 +64,6 @@ This is the section that displays and holds the group information
 ----------------    image tab-content
 -->
             <div id="tab-image" class="tab-content">
-<!--
-                This is the section that holds all of the users uploads
--->
                 <div class="section">
                     <div class="collection">
                         <label class="label LtBlue_Text">Collection</label>
@@ -106,14 +74,8 @@ This is the section that displays and holds the group information
 ----------------    group tab-content
 -->
             <div id="tab-group" class="tab-content">
-<!--
-                This is the section that holds all of the users groups
--->
                 <div class="section">
                     <div class="groups">
-<!--
-Label for Groups
--->
                         <label class="label LtBlue_Text">Groups</label>
                     </div>
                 </div>
@@ -122,15 +84,8 @@ Label for Groups
 ----------------    settings tab-content
 -->
             <div id="tab-settings" class="tab-content">
-                
-<!--
-                This is the section that holds all of the users settings
--->
                 <div class="section">
                     <div class="settings">
-<!--
-Label for settings
--->
                         <label class="label LtBlue_Text">Settings</label>
                         <div class="accordian">
 
@@ -144,11 +99,8 @@ Label for settings
 ====================================================       Container for holding recent activity notices
 -->
         <div class="recactivity_container z-depth-4 Monsterrat Blue_Text">
-            <!-- Label for the recent posts-->
             <div class="label center DtBlack_BG White_Text">Recent Posts</div>
-            <!--recent activity goes here-->
             <div class="recent_activity">
-                <!--The message/post template-->
                 <div class="post">
                     <div class="message White_BG right-align">
                         <div id="post-dateTime" class="time">
@@ -190,5 +142,4 @@ Label for settings
                 </div>
             </div>
         </div>
-</div>
 </div>

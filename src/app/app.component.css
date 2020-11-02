@@ -2,6 +2,20 @@ a {
     cursor: pointer;
 }
 
+.wide-container{
+    width: 100%;
+}
+
+html, body {
+    height: 100vh;
+}
+
+.wide-container .container {
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+}
+
 
 /*
 ======================      Max screen width 1024px laptop size    =================
