@@ -1,141 +1,130 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError , tap} from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { AuthData } from "./authData.model";
 
-import { User } from './user.model';
-import { Router } from '@angular/router';
+import { environment} from "../../../environments/environment";
 
-export interface AuthResponseData {
-    kind: string;
-    idToken: string;
-    email: string;
-    refreshToken: string;
-    expiresIn: string;
-    localId: string;
-    registered?: boolean;
-  }
+const BACKEND_URL = environment.apiURL + "/user/"
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService {
-    user = new BehaviorSubject<User>(null);
-    private tokenExpirationTimer: any;
+    private isAuthenticated = false;
+    private token:string;
+    private tokenTimer: any;
+    private userId: string;
+    private authStatusListener = new Subject<boolean>();
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private router: Router){}
+    
 
-    signUp(email: string, username: string, password: string) {
-        // tslint:disable-next-line:max-line-length
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDKX5HA35NvN9W0ZxJPF8Q1BB_1O3vOVkY',
-        {
-            email: email,
-            password: password,
-            returnSecureToken: true,
-        }).pipe(catchError(this.handleError),
-            tap( resData => {
-                this.handleAuthentication( resData.email, resData.localId, resData.idToken, +resData.expiresIn );
-                this.createUser( email, username, resData.localId );
-            })
-        );
+    getToken() {
+        return this.token;
     }
 
-    createUser(
-        email: string,
-        userId: string,
-        username: string
-        ) {
+    getIsAuth() {
+        return this.isAuthenticated;
+    }
 
+    getUserId() {
+        return this.userId;
+    }
+
+    getAuthStatusListener() {
+        return this.authStatusListener.asObservable();
+    }
+
+    createUser(email: string, password: string) {
+        const authData: AuthData = {email: email, password: password};
+         return this.http.post( BACKEND_URL + "signup", authData)
+            .subscribe( () => {
+                this.router.navigate["/auth"];
+            }, error => {
+                this.authStatusListener.next(false);
+            });
     }
 
     login(email: string, password: string) {
-        // tslint:disable-next-line:max-line-length
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDKX5HA35NvN9W0ZxJPF8Q1BB_1O3vOVkY',
-            {
-                email: email,
-                password: password,
-                returnSecureToken: true,
-            }).pipe(catchError(this.handleError),
-                tap(resData => {
-                    this.handleAuthentication(
-                    resData.email,
-                    resData.localId,
-                    resData.idToken,
-                    +resData.expiresIn
-                    );
-            }));
+        const authData: AuthData = {email: email, password: password};
+        this.http.post<{token: string, expiresIn: number, userId: string}>(BACKEND_URL +  "/login", authData)
+            .subscribe( response => {
+                const token = response.token;
+                this.token = token;
+                if(token) {
+                    const expiresInDuration = response.expiresIn;
+                    this.setAuthTimer(expiresInDuration);
+                    this.isAuthenticated = true;
+                    this.userId = response.userId;
+                    this.authStatusListener.next(true);
+                    const now = new Date();
+                    const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+                    console.log(expirationDate);
+                    this.saveAuthData(token, expirationDate, this.userId);
+                    this.router.navigate(['/']);
+                }
+            }, error => {
+                this.authStatusListener.next(false);
+            });
     }
 
-    autoLogin() {
-        const userData: {
-            email: string;
-            id: string;
-            _token: string;
-            _tokenExpirationDate: string;
-        } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
+    autoAuthUser() {
+        const authInformation = this.getAuthData();
+        if(!authInformation){
             return;
         }
-
-        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
-
-        if (loadedUser.token) {
-            this.user.next(loadedUser);
-            const expirationDuration = new Date(userData._tokenExpirationDate).getTime()
-                - new Date().getTime();
-            this.autoLogout(expirationDuration);
+        const now = new Date();
+        const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
+        if(expiresIn > 0 ){
+            this.token = authInformation.token;
+            this.isAuthenticated = true;
+            this.userId = authInformation.userId;
+            this.authStatusListener.next(true);
+            this.setAuthTimer(expiresIn/1000);
         }
     }
 
     logout() {
-        this.user.next(null);
-        this.router.navigate(['/auth']);
-        localStorage.removeItem('userData');
-        if (this.tokenExpirationTimer) {
-            clearTimeout(this.tokenExpirationTimer);
+        this.token = null;
+        this.isAuthenticated = false;
+        this.userId = null;
+        this.authStatusListener.next(false);
+        clearTimeout(this.tokenTimer);
+        this.clearAuthData();
+        this.router.navigate(['/']);
+    }
+
+    private setAuthTimer(duration: number) {
+        console.log('setting timer: ' + duration);
+        this.tokenTimer = setTimeout(() => {
+            this.logout()
+        }, duration * 1000);
+    }
+
+    private saveAuthData(token: string, expirationDate: Date, userId: string) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('expiration', expirationDate.toISOString());
+        localStorage.setItem('userId', userId);
+    }
+
+    private  clearAuthData(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('expiration');
+        localStorage.removeItem('userId');
+    }
+
+    private getAuthData(){
+        const token = localStorage.getItem('token');
+        const expirationDate = localStorage.getItem('expiration');
+        const userId = localStorage.getItem('userId');
+        if(!token || !expirationDate) {
+            return;
+        }
+        return {
+            token: token,
+            expirationDate: new Date(expirationDate),
+            userId: userId
         }
     }
 
-    autoLogout(expirationDuration: number) {
-        this.tokenExpirationTimer = setTimeout(() => {
-            this.logout();
-        }, expirationDuration);
-    }
-
-    private handleAuthentication(
-        email: string,
-        userId: string,
-        token: string,
-        expiresIn: number
-    ) {
-        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(
-            email,
-            userId,
-            token,
-            expirationDate
-            );
-        this.user.next(user);
-        this.autoLogout(expiresIn * 1000);
-
-        localStorage.setItem('userData', JSON.stringify(user));
-    }
-
-    private handleError(errorRes: HttpErrorResponse) {
-        let errorMessage = 'An Unknown error occurred!';
-        if (!errorRes.error || !errorRes.error.error) {
-        return throwError(errorMessage);
-        }
-        switch (errorRes.error.error.message) {
-            case 'EMAIL_EXISTS':
-                errorMessage = 'This email already exists';
-                break;
-            case 'EMAIL_NOT_FOUND':
-                errorMessage = 'This email already exists';
-                break;
-            case 'INVALID_PASSWORD':
-                errorMessage = 'This password is incorrect';
-                break;
-        }
-
-        return throwError(errorMessage);
-    }
 }

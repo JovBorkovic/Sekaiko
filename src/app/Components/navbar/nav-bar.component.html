@@ -20,7 +20,7 @@
     </div>
       <a class="brand-logo center" [routerLink]="['/']">Sekaiko</a>
     
-    <div fxLayout fxLayoutAlign="end" style="padding-right: 2%;" fxHide.lt-md >
+    <div fxFlex fxLayout fxLayoutAlign="end">
         <!--login/user button-->
         <app-user [isAuthenticated]=isAuthenticated (isLoggingOut)="onLogout()"></app-user>
     </div>

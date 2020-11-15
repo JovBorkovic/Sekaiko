@@ -1,24 +1,27 @@
-<div>
-    <div *ngIf="!isAuthenticated">
-        <a [routerLink]="['/auth']"  href="#">
-            <mat-icon>login</mat-icon>
-            Login
+<div class="userInformation">
+    <div *ngIf="!isAuthenticated" class="loginLink">
+        <a [routerLink]="['/auth']"  href="#" >
+            <mat-grid-list cols="2" >
+                <mat-grid-tile>
+                    <mat-icon >login</mat-icon>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <p>Login</p>
+                </mat-grid-tile>
+            </mat-grid-list>
         </a>
     </div>
-    <button mat-button [matMenuTriggerFor]="menu">
-        <div id="user-info" class="userinfohover" *ngIf="isAuthenticated" >
-            <div class="row " >
-                <div class="col s1">
-                    <app-user-image></app-user-image>
-                </div>
-                <div class="col">
-                    <p id="username" class="yellow ">
-                        Jovan Borkovic
-                    </p>
-                </div>
-            </div>
-    
-        </div>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated" class="userButton" >
+        <mat-grid-list cols="4" >
+            <mat-grid-tile colspan="1">
+                <app-user-image class="valign-wrapper"></app-user-image>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="3" fxHide.lt-md>
+                <p class="LBlue_Text">
+                    Jovan Borkovic
+                </p>
+            </mat-grid-tile>
+        </mat-grid-list>
     </button>
 
     

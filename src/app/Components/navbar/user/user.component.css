@@ -1,0 +1,32 @@
+.userInformation {
+    height: 100%;
+    max-width: 20%;
+}
+.userButton{
+    height: 100%!important;
+    width: 200px!important;
+    min-width: unset!important;
+}
+
+.userButton mat-grid-tile p{
+    margin: 0;
+}
+
+.loginLink {
+    height: 100%!important;
+    width: 100px!important;
+    min-width: unset!important;
+}
+.loginLink a {
+    display: inline-block;
+    height:100%;
+    width: 100%;
+}
+
+.loginLink mat-grid-tile p{
+    margin: 0;
+}
+
+.loginLink:hover {
+    background-color:rgba(195, 0, 255, 0.1);
+}

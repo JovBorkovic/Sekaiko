@@ -1,60 +1,59 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './Components/home/home.component';
-import { ArtComponent } from './Components/art/art.component';
-import { ForumComponent } from './Components/forum/forum.component';
-import { SupportComponent } from './Components/support/support.component';
-import { ForumthreadComponent } from './Components/forum-thread/forum-thread.component';
-import { AccHomeComponent } from './Components/acc-home/acc-home.component';
-import { UserComponent } from './Components/navbar/user/user.component';
-import { UserImageComponent} from './Components/navbar/user/user-image/user-image.component';
-import { NavbarComponent } from './Components/navbar/nav-bar.component';
-import { ParallaxComponent } from './components/parallax/parallax.component';
-import { ArtFilterComponent } from './components/art/art-filter/art-filter.component';
-import { AuthComponent } from './Components/auth/auth.component';
-import { LoadingSpinnerComponent } from './Components/shared/loading-spinner/loading-spinner.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarModule } from './Components/navbar/nav-bar.module';
 import { AuthService } from './Components/auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from './Components/auth/auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { PostsModule } from './Components/post/posts.module';
+import { AuthInterceptor } from './Components/auth/auth-interceptor';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParallaxComponent } from './Components/parallax/parallax.component';
+import { HomeComponent } from './Components/home/home.component';
+import { ArtFilterComponent } from './Components/art/art-filter/art-filter.component';
+import { AccHomeComponent } from './Components/acc-home/acc-home.component';
+import { AuthComponent } from './Components/auth/auth.component';
+import { ArtComponent } from './Components/art/art.component';
+import { ForumComponent } from './Components/forum/forum.component';
+import { ForumthreadComponent } from './Components/forum-thread/forum-thread.component';
+import { SupportComponent } from './Components/support/support.component';
+import { NavbarComponent } from './Components/navbar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ParallaxComponent,
     HomeComponent,
+    ArtFilterComponent,
+    AccHomeComponent,
+    AuthComponent,
     ArtComponent,
     ForumComponent,
-    SupportComponent,
     ForumthreadComponent,
-    AccHomeComponent,
-    UserComponent,
-    UserImageComponent,
-    NavbarComponent,
-    ParallaxComponent,
-    ArtFilterComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
+    SupportComponent,
+    NavbarComponent
   ],
   imports: [
+    NavbarModule,
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
+    PostsModule,
     AngularMaterialModule,
-    FlexLayoutModule
   ],
   providers: [
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

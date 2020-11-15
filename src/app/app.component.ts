@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import * as j from 'jquery';
+import { Subscription } from 'rxjs';
 import { AuthService } from './Components/auth/auth.service';
 
 @Component({
@@ -9,11 +10,13 @@ import { AuthService } from './Components/auth/auth.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'Sekaiko';
+  isAuthenticated = false;
+  private userSub: Subscription;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.autoLogin();
+    this.authService.autoAuthUser();
   }
 
   onSidenavClose() {
