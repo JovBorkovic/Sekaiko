@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -11,8 +11,12 @@ import { AuthService } from '../auth/auth.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub: Subscription;
-
   constructor(private authService: AuthService) {}
+  @Output() public sidenavToggle = new EventEmitter();
+
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  }
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe( user => {

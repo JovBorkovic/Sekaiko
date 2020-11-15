@@ -10,12 +10,18 @@ html, body {
     height: 100vh;
 }
 
-.wide-container .container {
-    padding: 40px 0px;
+.wide-container > .container {
+    padding: 0px;
     display: flex;
     justify-content: center;
 }
 
+.wide-container mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+.wide-container mat-sidenav {
+    width: 250px;
+}
 
 /*
 ======================      Max screen width 1024px laptop size    =================

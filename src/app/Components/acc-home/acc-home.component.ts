@@ -1,8 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as M from 'materialize-css';
-declare var $: any;
-
 @Component({
   selector: 'app-acc-home',
   templateUrl: './acc-home.component.html',

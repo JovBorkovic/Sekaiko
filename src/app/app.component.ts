@@ -16,6 +16,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.authService.autoLogin();
   }
 
+  onSidenavClose() {
+  }
+
 
   ngAfterViewInit() {
     j().ready(() => {

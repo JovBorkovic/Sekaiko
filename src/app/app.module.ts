@@ -20,7 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './Components/auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './Components/auth/auth-interceptor.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ParallaxComponent,
     ArtFilterComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthService,

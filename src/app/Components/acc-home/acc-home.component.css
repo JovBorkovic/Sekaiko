@@ -140,7 +140,6 @@ label for sections on acc page
 .recactivity_container{
     flex: 1;
     margin-bottom: 7%;
-    border-radius: 6% 0% 6% 6%;
     overflow: hidden;
 }
 .recactivity_container .label{
@@ -155,7 +154,6 @@ label for sections on acc page
     1px 1px 0 #2469BB;
 }
 .recent_activity{
-    border-bottom: 1px solid #FFF;
     height: 100%;
 }
 .recent_activity:last-child{
@@ -167,11 +165,9 @@ label for sections on acc page
     display: flex;
 }
 .account-image{
-    display: inline-block;
-    height: 100%;
     width: 15%;
-    margin-left: -15%;
-    z-index: -1;
+    margin: auto 0 auto -15%;
+    z-index: 1;
 }
 .account-image > .material-icons{
     font-size: 65px;
@@ -179,6 +175,7 @@ label for sections on acc page
 .message{
     display: inline-block;
     width: 100%;
+    z-index: 2;
 }
 .message:hover{
     animation: slide 0.3s forwards;
@@ -188,7 +185,6 @@ label for sections on acc page
     font-size: 10px;
     color: grey;
 }
-
 
 
 
@@ -209,7 +205,7 @@ label for sections on acc page
 */
 @-webkit-keyframes stretch{
     100% {    
-        z-index: 2; 
+        z-index: 10; 
         width: 100%; 
         height: 100%; 
         position: fixed;
@@ -219,7 +215,7 @@ label for sections on acc page
 }
 @keyframes stretch{
     100% {
-        z-index: 2;
+        z-index: 10;
         width: 100%;
         height: 100%;
         position: fixed;
@@ -277,6 +273,20 @@ seperate from the background image container for the users name
     .recent_activity{
         border-bottom: 1px solid #FFF;
         height: 100%;
+    }
+    .account-image{
+        
+        display: inline;
+        height: 100%;
+        width: 15%;
+        margin-left: 0;
+        z-index: 1;
+    }
+    .message {
+        animation: none;
+    }
+    .message:hover {
+        animation: none;
     }
 }
 

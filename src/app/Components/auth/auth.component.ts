@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { AuthResponseData, AuthService } from './auth.service';
 
@@ -9,22 +8,15 @@ import { AuthResponseData, AuthService } from './auth.service';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   // add NgbModalConfig and NgbModal to the component providers
-  providers: [NgbModalConfig, NgbModal]
 })
 export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
 
-  constructor(private authService: AuthService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
-    // customize default values of modals used by this component tree
-    config.backdrop = 'static';
-    config.keyboard = true;
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  open(content) {
-    this.modalService.open(content);
-  }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
