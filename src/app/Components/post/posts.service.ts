@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { environment} from "../../../environments/environment";
 import { Post } from "./post.model";
@@ -14,7 +14,7 @@ export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<{ posts: Post[]; postCount: number }>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
@@ -47,6 +47,40 @@ export class PostsService {
       });
   }
 
+  // getPostsCreator( creator:string ,postsPerPage: number, currentPage: number) {
+  //   const queryParams = `?creator=${this.route.snapshot.params['id']}&pagesize=${postsPerPage}&page=${currentPage}`;
+  //   this.http
+  //     .get<{ message: string; posts: any; maxPosts: number }>(
+  //       BACKEND_URL + queryParams
+  //     )
+  //     .pipe(
+  //       map((postData) => {
+  //         return {
+  //           posts: postData.posts.map((post) => {
+  //             return {
+  //               title: post.title,
+  //               content: post.content,
+  //               id: post._id,
+  //               imagePath: post.imagePath,
+  //               creator: post.creator,
+  //             };
+  //           }),
+  //           maxPosts: postData.maxPosts,
+  //         };
+  //       })
+  //     )
+  //     .subscribe((transformedPostData) => {
+  //       this.posts = transformedPostData.posts;
+  //       this.postsUpdated.next({
+  //         posts: [...this.posts],
+  //         postCount: transformedPostData.maxPosts,
+  //       });
+  //     });
+  // }
+
+
+  
+
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
@@ -61,12 +95,17 @@ export class PostsService {
     }>(BACKEND_URL + id);
   }
 
+  getPostUser(userId: string) {
+
+  }
+
   addPost(title: string, content: string, image: File) {
     // const post: Post = { id: null, title: title, content: content };
     const postData = new FormData();
     postData.append("title", title);
     postData.append("content", content);
     postData.append("image", image, title);
+    console.log(postData.get("image"));
     this.http
       .post<{ message: string; post: Post }>(
         BACKEND_URL,

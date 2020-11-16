@@ -10,7 +10,6 @@ import { AuthService } from '../auth/auth.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  private userSub: Subscription;
   constructor(private authService: AuthService) {}
   @Output() public sidenavToggle = new EventEmitter();
 
@@ -19,12 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('sekaikoData')) {
-      this.userSub = this.authService.getAuthStatusListener().subscribe( res => {
-        this.isAuthenticated = res;
-      });
-      this.authService.autoAuthUser();
-    }
+    this.isAuthenticated = this.authService.getIsAuth();
   }
 
   ngAfterContentChecked(): void {
@@ -38,7 +32,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
   }
 
 }

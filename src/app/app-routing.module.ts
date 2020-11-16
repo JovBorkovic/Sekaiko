@@ -8,6 +8,7 @@ import { ForumthreadComponent } from './Components/forum-thread/forum-thread.com
 import { AccHomeComponent } from './Components/acc-home/acc-home.component';
 import { AuthGuard } from './Components/auth/auth.guard';
 import { AuthComponent } from './Components/auth/auth.component';
+import { PostCreateComponent } from './Components/post/post-create/post-create.component';
 
 const route: Routes = [
   { path: '', component: HomeComponent },
@@ -15,11 +16,12 @@ const route: Routes = [
   { path: 'art', component: ArtComponent },
   { path: 'auth', component: AuthComponent},
   { path: 'forum', component: ForumComponent , canActivate: [AuthGuard], children: [
-    { path: 'forum-thread', component: ForumthreadComponent }
+    { path: ':forumId', component: ForumthreadComponent }
    ] },
   { path: 'support', component: SupportComponent, canActivate: [AuthGuard] },
   { path: 'acc-home', children:[ 
-    { path: 'acc-home/:username', component: AccHomeComponent, canActivate: [AuthGuard]},
+    { path: ':id/:username', component: AccHomeComponent, canActivate: [AuthGuard]},
+    { path: ':id/:username/create', component: PostCreateComponent, canActivate: [AuthGuard]}
   ]},
 ];
 

@@ -9,7 +9,7 @@ mat-spinner {
     width: auto;
 }
 
-input[type=file] {
+input[type="file"] {
     visibility: hidden;
 }
 

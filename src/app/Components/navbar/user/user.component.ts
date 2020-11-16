@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { AuthData } from '../../auth/authData.model';
@@ -8,29 +9,37 @@ import { AuthData } from '../../auth/authData.model';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() isAuthenticated: boolean;
-  private userSub: Subscription;
+export class UserComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+  isAuthenticated = false;
   @Output() isLoggingOut = new EventEmitter();
   username: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnChanges() {
+  }
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.getIsAuth();
+    this.username = this.authService.getUsername();
   }
   
 
   ngAfterViewInit(): void {
-    this.username = this.authService.getUsername();
+  }
+
+  goMyHome(){
+    this.router.navigate(['/acc-home', this.authService.getUserId(), this.authService.getUsername() ]
+    // , {queryParams: { id: this.authService.getUserId() }}
+    );
   }
 
   emitLogout() {
+    this.username = null;
     this.isLoggingOut.emit();
   }
 
   ngOnDestroy(): void {
-    this.userSub.unsubscribe();
-    
   }
 
 }

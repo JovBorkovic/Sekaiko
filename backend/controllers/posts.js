@@ -33,12 +33,13 @@ exports.deletePost =  (req, res, next) => {
 
  exports.createPost = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
+    console.log(req.file);
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
       imagePath: url + "/images/" + req.file.filename,
       //this value was made available by the checkAuth middleware
-      creator: req.userData.userId,
+      creator: req.userData.userId
     });
     post.save().then((createdPost) => {
       res.status(201).json({
