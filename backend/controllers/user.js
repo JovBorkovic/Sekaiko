@@ -14,6 +14,7 @@ exports.createUser = (req, res, next) => {
     bcrpyt.hash(req.body.password, 10).then( hash => {
         const user = new User({
           email: req.body.email,
+          username: req.body.username,
           password: hash,
         });
         user.save()
@@ -52,11 +53,12 @@ exports.userLogin = (req, res, next) => {
             }
             //the token holds the email as well as the UserID, 
             //which can be decoded later in check-auth to be used for creating posts. (creator) in {User}.model
-            const token = jwt.sign({email: fetchedUser.email, userId: fetchedUser._id}, JWT_KEY, {expiresIn: '1h', });
+            const token = jwt.sign({email: fetchedUser.email, userId: fetchedUser._id, username: fetchedUser.username}, JWT_KEY, {expiresIn: '1h', });
             res.status(200).json({
                 token: token,
                 expiresIn: 3600,
-                userId: fetchedUser._id
+                userId: fetchedUser._id,
+                username: fetchedUser.username
             });
         })
         .catch(err => {

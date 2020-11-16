@@ -19,10 +19,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userSub = this.authService.getAuthStatusListener().subscribe( res => {
-      console.log(res);
-      this.isAuthenticated = res;
-    });
+    if(localStorage.getItem('sekaikoData')) {
+      this.userSub = this.authService.getAuthStatusListener().subscribe( res => {
+        this.isAuthenticated = res;
+      });
+      this.authService.autoAuthUser();
+    }
+  }
+
+  ngAfterContentChecked(): void {
+    //Called after every check of the component's or directive's content.
+    //Add 'implements AfterContentChecked' to the class.
+    
   }
 
   onLogout() {
