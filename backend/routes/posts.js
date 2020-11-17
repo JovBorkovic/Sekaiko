@@ -24,6 +24,8 @@ router.put(
 
 router.get("",  PostsController.getPosts);
 
+router.get("/:id", PostsController.getCreatorsPosts)
+
 router.get("/:id", PostsController.getPost);
 
 router.delete("/:id", checkAuth, PostsController.deletePost);

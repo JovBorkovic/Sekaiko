@@ -68,7 +68,34 @@ exports.deletePost =  (req, res, next) => {
     postQuery
       .then(documents => {
         fetchedPosts = documents;
-        return Post.count();
+        return Post.countDocuments();
+      })
+      .then(count => {
+        res.status(200).json({
+          message: "Posts fetched successfully!",
+          posts: fetchedPosts,
+          maxPosts: count
+        });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "Fetching posts failed!"
+        });
+      });
+  }
+
+  exports.getCreatorsPosts = (req, res, next) => {
+    const pageSize = +req.query.pagesize;
+    const currentPage = +req.query.page;
+    const postQuery = Post.find( { creator: req.params.id });
+    let fetchedPosts;
+    if (pageSize && currentPage) {
+      postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+    }
+    postQuery
+      .then(documents => {
+        fetchedPosts = documents;
+        return fetchedPosts.length;
       })
       .then(count => {
         res.status(200).json({

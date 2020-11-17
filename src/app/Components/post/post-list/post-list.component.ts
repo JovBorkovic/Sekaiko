@@ -32,20 +32,31 @@ export class PostListComponent implements OnInit, OnDestroy {
   constructor(public postsService: PostsService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    this.isLoading = true;
+    this.userId = this.authService.getUserId();
+
     if(this.router.url.includes('/acc-home')){
+      console.log("we are in here");
       this.postsPerPage = 5;
       this.pageSizeOptions = [5];
+      this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
+      this.postsSub = this.postsService
+        .getPostUpdateListener()
+        .subscribe((postData: { posts: Post[]; postCount: number }) => {
+          this.isLoading = false;
+          this.totalPosts = postData.postCount;
+          this.posts = postData.posts;
+        });
+    } else if(!this.router.url.includes('/acc-home')){
+      this.postsService.getPosts(this.postsPerPage, this.currentPage);
+      this.postsSub = this.postsService
+        .getPostUpdateListener()
+        .subscribe((postData: { posts: Post[]; postCount: number }) => {
+          this.isLoading = false;
+          this.totalPosts = postData.postCount;
+          this.posts = postData.posts;
+        });
     }
-    this.isLoading = true;
-    this.postsService.getPosts(this.postsPerPage, this.currentPage);
-    this.userId = this.authService.getUserId();
-    this.postsSub = this.postsService
-      .getPostUpdateListener()
-      .subscribe((postData: { posts: Post[]; postCount: number }) => {
-        this.isLoading = false;
-        this.totalPosts = postData.postCount;
-        this.posts = postData.posts;
-      });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
       .getAuthStatusListener()
@@ -53,13 +64,16 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+
   }
 
   onDelete(postId: string) {
 
     this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(() => {
-      this.postsService.getPosts(this.postsPerPage, this.currentPage);
+      if(this.router.url.includes('/acc-home')){ 
+        this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
+      } else this.postsService.getPosts(this.postsPerPage, this.currentPage);
     }, () => {
       this.isLoading = false;
     });
@@ -71,9 +85,17 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   onChangedPage(pageData: PageEvent) {
-    this.isLoading = true;
-    this.currentPage = pageData.pageIndex + 1;
-    this.postsPerPage = pageData.pageSize;
-    this.postsService.getPosts(this.postsPerPage, this.currentPage);
+    if(this.router.url.includes('/acc-home')){
+      this.isLoading = true;
+      this.currentPage = pageData.pageIndex + 1;
+      this.postsPerPage = pageData.pageSize;
+      this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
+    }
+    else{
+      this.isLoading = true;
+      this.currentPage = pageData.pageIndex + 1;
+      this.postsPerPage = pageData.pageSize;
+      this.postsService.getPosts(this.postsPerPage, this.currentPage);
+    }
   }
 }
