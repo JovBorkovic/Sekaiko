@@ -19,7 +19,7 @@
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-            <app-navbar (sidenavToggle)="sidenav.toggle()"></app-navbar>
+            <app-navbar (sidenavToggle)="sidenav.toggle()" (loggingOut)="logOut()" [isAuthenticated]="isAuthenticated"></app-navbar>
           <!--in here all the content must reside. We will add a navigation header as well-->
           <main>
             <router-outlet></router-outlet>

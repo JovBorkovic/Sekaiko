@@ -66,20 +66,20 @@ exports.deletePost =  (req, res, next) => {
       postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
     }
     postQuery
-      .then((documents) => {
+      .then(documents => {
         fetchedPosts = documents;
         return Post.count();
       })
-      .then((count) => {
+      .then(count => {
         res.status(200).json({
           message: "Posts fetched successfully!",
           posts: fetchedPosts,
-          maxPosts: count,
+          maxPosts: count
         });
       })
-      .catch( error => {
+      .catch(error => {
         res.status(500).json({
-          message: 'Fetching posts failed'
+          message: "Fetching posts failed!"
         });
       });
   }

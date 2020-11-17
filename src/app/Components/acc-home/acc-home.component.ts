@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, SimpleChanges } from "@angular/core";
 import * as j from "jquery";
 import {
   ActivatedRoute,
-  ActivatedRouteSnapshot,
   Router,
 } from "@angular/router";
 @Component({

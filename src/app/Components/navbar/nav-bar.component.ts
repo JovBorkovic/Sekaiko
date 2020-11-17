@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -9,9 +9,10 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
+  @Input() isAuthenticated;
   constructor(private authService: AuthService) {}
   @Output() public sidenavToggle = new EventEmitter();
+  @Output() loggingOut = new EventEmitter();
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
@@ -28,7 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.logout();
+    this.loggingOut.emit();
   }
 
   ngOnDestroy() {

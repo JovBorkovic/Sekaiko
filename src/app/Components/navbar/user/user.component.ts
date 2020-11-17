@@ -10,7 +10,7 @@ import { AuthData } from '../../auth/authData.model';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
-  isAuthenticated = false;
+  @Input() isAuthenticated;
   @Output() isLoggingOut = new EventEmitter();
   username: string;
 

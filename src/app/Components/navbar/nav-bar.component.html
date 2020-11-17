@@ -22,7 +22,7 @@
     
     <div fxFlex fxLayout fxLayoutAlign="end">
         <!--login/user button-->
-        <app-user (isLoggingOut)="onLogout()"></app-user>
+        <app-user (isLoggingOut)="onLogout()" [isAuthenticated]="isAuthenticated"></app-user>
     </div>
     
   </div>

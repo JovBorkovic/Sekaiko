@@ -44,6 +44,7 @@ export class PostsService {
           posts: [...this.posts],
           postCount: transformedPostData.maxPosts,
         });
+        console.log(transformedPostData.posts);
       });
   }
 

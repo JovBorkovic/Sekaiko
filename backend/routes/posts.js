@@ -1,7 +1,7 @@
 const express = require("express");
 
 const checkAuth = require("../middleware/check-auth");
-const multer = require("multer");
+const fileUpload = require("../middleware/file");
 
 const PostsController = require("../controllers/posts");
 
@@ -11,14 +11,14 @@ const router = express.Router();
 router.post(
   "",
   checkAuth,
-  multer({ dest: "backend/images" }).single("image"),
+  fileUpload,
   PostsController.createPost
 );
 
 router.put(
   "/:id",
   checkAuth,
-  multer({ dest: "backend/images" }).single("image"),
+  fileUpload,
   PostsController.updatePost
 );
 
