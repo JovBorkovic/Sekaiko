@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from '@angular/router';
-import { Subscription } from "rxjs";
-import { AuthService } from "./auth.service";
+import { Observable, Subscription } from "rxjs";
+import { AuthService, ResponseData } from "./auth.service";
 
 
 @Component({
@@ -28,8 +28,8 @@ import { AuthService } from "./auth.service";
     }
 
     ngOnInit() {
-        this.authStatusSub = this.authService.getAuthStatusListener().subscribe( authStatus => {
-            this.isLoading = authStatus;
+        this.authStatusSub = this.authService.user.subscribe( user => {
+            this.isLoading = !!user;
         });
     }
 
@@ -37,14 +37,24 @@ import { AuthService } from "./auth.service";
         if (!form.valid) {
           return;
         }
+
+        let authObs: Observable<ResponseData>;
     
         this.isLoading = true;
         if (this.isLoginMode) {
-            this.authService.login(form.value.email, null, form.value.password);
+            this.isLoading = true;
+            authObs = this.authService.login(form.value.email, null, form.value.password);
         } else {
             this.isLoading = true;
-            this.authService.createUser(form.value.email, form.value.username, form.value.password);
+            authObs = this.authService.createUser(form.value.email, form.value.username, form.value.password);
         }
+
+        authObs.subscribe( () => {
+            this.router.navigate["/"];
+        }, error => {
+            this.isLoading = false;
+        });
+        
 
         
         this.isLoading = false;

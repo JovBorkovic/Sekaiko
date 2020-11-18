@@ -1,9 +1,3 @@
-export interface AuthData {
-    email: string;
-    username: string;
-    password: string;
-}
-
 export class User {
     constructor(
         public email: string,
@@ -11,13 +5,13 @@ export class User {
         public username: string,
         private _token: string,
         private _tokenExpirationDate: Date
-    ) {}
+    ) {};
 
-    get token(){
+    get token() {
         if(!this._tokenExpirationDate || new Date() > this._tokenExpirationDate){
-            return null
+            return null;
         }
         
-        return this._token
+        return this._token;
     }
 }

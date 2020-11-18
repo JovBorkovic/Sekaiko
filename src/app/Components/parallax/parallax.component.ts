@@ -1,14 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-parallax',
   templateUrl: './parallax.component.html',
   styleUrls: ['./parallax.component.css']
 })
-export class ParallaxComponent implements OnInit {
+export class ParallaxComponent implements OnInit, OnDestroy {
+  userSubs: Subscription;
+  isAuthenticated = true;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.userSubs = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!!user;
+    })
+  }
+
+  ngOnDestroy() {
+    this.userSubs.unsubscribe();
   }
 
 

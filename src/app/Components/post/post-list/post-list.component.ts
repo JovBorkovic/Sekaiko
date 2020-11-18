@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { Router } from "@angular/router";
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
 import { AuthService } from "../../auth/auth.service";
 
 import { Post } from "../post.model";
@@ -10,7 +10,7 @@ import { PostsService } from "../posts.service";
 @Component({
   selector: "app-post-list",
   templateUrl: "./post-list.component.html",
-  styleUrls: ["./post-list.component.css"]
+  styleUrls: ["./post-list.component.css"],
 })
 export class PostListComponent implements OnInit, OnDestroy {
   // posts = [
@@ -29,17 +29,32 @@ export class PostListComponent implements OnInit, OnDestroy {
   private postsSub: Subscription;
   private authStatusSub: Subscription;
 
-  constructor(public postsService: PostsService, private authService: AuthService, private router: Router) {}
+  constructor(
+    public postsService: PostsService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.isLoading = true;
-    this.userId = this.authService.getUserId();
 
-    if(this.router.url.includes('/acc-home')){
+    this.authStatusSub = this.authService.user.subscribe((user) => {
+      if (!user) {
+        return;
+      }
+      this.userIsAuthenticated = !!user;
+      this.userId = user.id;
+    });
+
+    if (this.router.url.includes("/acc-home")) {
       console.log("we are in here");
       this.postsPerPage = 5;
       this.pageSizeOptions = [5];
-      this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
+      this.postsService.getCreatorPosts(
+        this.userId,
+        this.postsPerPage,
+        this.currentPage
+      );
       this.postsSub = this.postsService
         .getPostUpdateListener()
         .subscribe((postData: { posts: Post[]; postCount: number }) => {
@@ -47,7 +62,7 @@ export class PostListComponent implements OnInit, OnDestroy {
           this.totalPosts = postData.postCount;
           this.posts = postData.posts;
         });
-    } else if(!this.router.url.includes('/acc-home')){
+    } else if (!this.router.url.includes("/acc-home")) {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);
       this.postsSub = this.postsService
         .getPostUpdateListener()
@@ -57,41 +72,47 @@ export class PostListComponent implements OnInit, OnDestroy {
           this.posts = postData.posts;
         });
     }
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-        this.userId = this.authService.getUserId();
-      });
-
   }
 
   onDelete(postId: string) {
-
     this.isLoading = true;
-    this.postsService.deletePost(postId).subscribe(() => {
-      if(this.router.url.includes('/acc-home')){ 
-        this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
-      } else this.postsService.getPosts(this.postsPerPage, this.currentPage);
-    }, () => {
-      this.isLoading = false;
-    });
+    this.postsService.deletePost(postId).subscribe(
+      res => {
+        console.log(res.message);
+        if (this.router.url.includes("/acc-home")) {
+          this.postsService.getCreatorPosts(
+            this.userId,
+            this.postsPerPage,
+            this.currentPage
+          );
+        } else {
+          this.postsService.getPosts(this.postsPerPage, this.currentPage);
+        }
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 
   ngOnDestroy() {
-    this.postsSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    if (this.userIsAuthenticated) {
+      this.postsSub.unsubscribe();
+      this.authStatusSub.unsubscribe();
+    }
   }
 
   onChangedPage(pageData: PageEvent) {
-    if(this.router.url.includes('/acc-home')){
+    if (this.router.url.includes("/acc-home")) {
       this.isLoading = true;
       this.currentPage = pageData.pageIndex + 1;
       this.postsPerPage = pageData.pageSize;
-      this.postsService.getCreatorPosts(this.userId, this.postsPerPage, this.currentPage);
-    }
-    else{
+      this.postsService.getCreatorPosts(
+        this.userId,
+        this.postsPerPage,
+        this.currentPage
+      );
+    } else {
       this.isLoading = true;
       this.currentPage = pageData.pageIndex + 1;
       this.postsPerPage = pageData.pageSize;

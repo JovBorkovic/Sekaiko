@@ -16,12 +16,13 @@ exports.getPost = (req, res, next) => {
   };
   
 exports.deletePost =  (req, res, next) => {
+  // console.log(req.userData.userId);
     Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then((result) => {
       if(result.n > 0) {
-        console.log(result);
+        // console.log(result);
         res.status(200).json({ message: "Deletion Successfull!" });
       } else {
-        res.status(401).json({ message: "Not authorized." });
+        res.status(401).json({ message: "Not authorized." + req.params.id + req.userData.userId });
       }
     }).catch( error => {
       res.status(500).json({
@@ -33,7 +34,7 @@ exports.deletePost =  (req, res, next) => {
 
  exports.createPost = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
-    console.log(req.file);
+    // console.log(req.file);
     const post = new Post({
       title: req.body.title,
       content: req.body.content,

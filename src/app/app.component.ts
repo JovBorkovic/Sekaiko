@@ -11,18 +11,15 @@ import { AuthService } from './Components/auth/auth.service';
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'Sekaiko';
   isAuthenticated = false;
-  private userSub: Subscription;
-
+  userSubs: Subscription;
   constructor(private authService: AuthService) {}
 
 
   ngOnInit() {
-    if(localStorage.getItem("sekaikoData")){
-      this.authService.autoAuthUser();
-      this.userSub = this.authService.getAuthStatusListener().subscribe(authStatus => {
-        this.isAuthenticated = !!authStatus;
-      });
-    }
+    this.userSubs = this.authService.user.subscribe( user => {
+      this.isAuthenticated = !!user;
+    })
+    this.stretchParallax();
   }
 
   onSidenavClose() {
@@ -30,7 +27,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngAfterViewInit() {
-    this.stretchParallax();
   }
 
   stretchParallax() {
@@ -53,12 +49,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   logOut() {
-    this.isAuthenticated = false;
     this.authService.logout();
   }
 
   ngOnDestroy(): void {
-    this.userSub.unsubscribe();
   }
 
 

@@ -11,7 +11,7 @@ import { AuthComponent } from './Components/auth/auth.component';
 import { PostCreateComponent } from './Components/post/post-create/post-create.component';
 
 const route: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: "full" },
   { path: 'home', component: HomeComponent },
   { path: 'art', component: ArtComponent },
   { path: 'auth', component: AuthComponent},
@@ -23,6 +23,7 @@ const route: Routes = [
     { path: ':id/:username', component: AccHomeComponent, canActivate: [AuthGuard]},
     { path: ':id/:username/create', component: PostCreateComponent, canActivate: [AuthGuard]}
   ]},
+  { path: '**', redirectTo: '/home', pathMatch: "full" }
 ];
 
 @NgModule({

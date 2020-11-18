@@ -1,127 +1,112 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
-import { AuthData } from "./authData.model";
+import { BehaviorSubject, Subject} from "rxjs";
+import { tap } from "rxjs/operators";
+import { User } from "./user.model";
 
 import { environment} from "../../../environments/environment";
 
+
 const BACKEND_URL = environment.apiURL + "/user/"
+
+export interface ResponseData {
+    userId: string,
+    email: string,
+    username: string,
+    token: string,
+    expiresIn: string
+}
+
+
+export interface AuthSentData {
+    email: string,
+    username: string,
+    password: string
+};
+
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    private isAuthenticated = false;
-    private token:string;
-    private tokenTimer: any;
-    private userId: string;
-    private username: string;
-    private authStatusListener = new Subject<boolean>();
+    user = new BehaviorSubject<User>(null);
+    private tokenExpirationTimer: any;
 
     constructor(private http: HttpClient, private router: Router){}
     
 
-    getToken() {
-        return this.token;
-    }
-
-    getIsAuth() {
-        return this.isAuthenticated;
-    }
-
-    getUserId() {
-        return this.userId;
-    }
-    
-    getUsername() {
-        return this.username;
-    }
-
-    getAuthStatusListener() {
-        return this.authStatusListener.asObservable();
-    }
 
     createUser(email: string, username: string, password: string) {
-        const authData: AuthData = {email: email, username: username, password: password};
-         return this.http.post( BACKEND_URL + "signup", authData)
-            .subscribe( () => {
-                this.router.navigate["/auth"];
-            }, error => {
-                this.authStatusListener.next(false);
-            });
+        const authData: AuthSentData = { email: email, username: username, password: password};
+         return this.http.post<ResponseData>( BACKEND_URL + "signup", authData)
+            .pipe(tap({
+                next: responseData => {
+                    this.handleAuthentication(
+                        responseData.email,
+                        responseData.userId, 
+                        responseData.username,
+                        responseData.token, 
+                        +responseData.expiresIn
+                        );
+                }
+            }));
     }
 
     //username is just placeholder. Will not function
     login(email: string, username: string, password: string) {
-        const authData: AuthData = {email: email, username: username, password: password};
-        this.http.post<{token: string, expiresIn: number, userId: string, username: string}>(BACKEND_URL +  "/login", authData)
-            .subscribe( response => {
-                const token = response.token;
-                this.token = token;
-                if(token) {
-                    const expiresInDuration = response.expiresIn;
-                    this.setAuthTimer(expiresInDuration);
-                    this.isAuthenticated = true;
-                    this.userId = response.userId;
-                    this.username = response.username;
-                    this.authStatusListener.next(true);
-                    const now = new Date();
-                    const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-                    console.log(expirationDate);
-                    this.saveAuthData(token, expirationDate, this.userId, this.username);
-                    this.router.navigate(['/']);
+        const authData: AuthSentData = {email: email, username: username, password: password};
+        return this.http.post<ResponseData>(BACKEND_URL +  "/login", authData)
+            .pipe(tap({
+                next: responseData => {
+                    this.handleAuthentication(
+                        responseData.email, 
+                        responseData.userId, 
+                        responseData.username, 
+                        responseData.token, 
+                        +responseData.expiresIn
+                        );
                 }
-            }, error => {
-                this.authStatusListener.next(false);
-            });
+            }));
     }
 
-    autoAuthUser() {
-        const authInformation = this.getAuthData();
-        if(!authInformation){
-            return;
-        }
-        const now = new Date();
-        const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-        if(expiresIn > 0 ){
-            this.token = authInformation.token;
-            this.isAuthenticated = true;
-            this.userId = authInformation.userId;
-            this.username = authInformation.username;
-            this.authStatusListener.next(true);
-            this.setAuthTimer(expiresIn/1000);
-        }
+    handleAuthentication(email: string, userId: string, username: string, token: string, expiresIn: number){
+        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(email , userId, username ,token , expirationDate);
+        this.saveAuthData(token, expirationDate, userId, username, email);
+        this.user.next(user);
+        this.autoLogout(expiresIn * 1000);
+    }
+
+    autoLogin() {
+        this.getAuthData();
     }
 
     logout() {
-        this.token = null;
-        this.isAuthenticated = false;
-        this.userId = null;
-        this.authStatusListener.next(false);
-        clearTimeout(this.tokenTimer);
-        this.clearAuthData();
+        this.user.next(null);
+        clearTimeout(this.tokenExpirationTimer);
         this.router.navigate(['/']);
+        this.clearAuthData();
+        if(this.tokenExpirationTimer) {
+            clearTimeout(this.tokenExpirationTimer);
+        }
+        this.tokenExpirationTimer = null;
     }
 
-    private setAuthTimer(duration: number) {
-        console.log('setting timer: ' + duration);
-        this.tokenTimer = setTimeout(() => {
+    autoLogout(expirationDuration: number) {
+        console.log('setting timer: ' + expirationDuration);
+        this.tokenExpirationTimer = setTimeout(() => {
             this.logout()
-        }, duration * 1000);
+        }, expirationDuration);
     }
 
-    private saveAuthData(token: string, expirationDate: Date, userId: string, username: string) {
+    private saveAuthData(token: string, expirationDate: Date, userId: string, username: string, email: string) {
         const sekaikoData = {
             token: token,
             expiration: expirationDate,
             userId: userId,
-            username: username
+            username: username,
+            email: email
         } 
         localStorage.setItem('sekaikoData', JSON.stringify(sekaikoData));
-
-        // localStorage.setItem('token', token);
-        // localStorage.setItem('expiration', expirationDate.toISOString());
-        // localStorage.setItem('userId', userId);
-        // localStorage.setItem('username', username);
     }
 
     private  clearAuthData(){
@@ -129,20 +114,33 @@ export class AuthService {
     }
 
     private getAuthData(){
-        const sekaikoData = JSON.parse(localStorage.getItem('sekaikoData'));
-
-        const token = sekaikoData.token;
-        const expirationDate = sekaikoData.expiration;
-        const userId = sekaikoData.userId;
-        const username = sekaikoData.username;
-        if(!token || !expirationDate) {
+        const sekaikoData :{
+            email: string,
+            userId: string,
+            username: string,
+            token: string,
+            expiration: Date
+        } = JSON.parse(localStorage.getItem('sekaikoData'));
+        console.log(sekaikoData.token, sekaikoData.expiration)
+        if(!sekaikoData.token || !sekaikoData.expiration) {
             return;
         }
-        return {
-            token: token,
-            expirationDate: new Date(expirationDate),
-            userId: userId,
-            username: username
+
+        const newData = new User(
+            sekaikoData.email,
+            sekaikoData.userId,
+            sekaikoData.username,
+            sekaikoData.token,
+            new Date(sekaikoData.expiration),
+        );
+        console.log(newData.username);
+        
+        const now = new Date();
+        
+        if(newData.token){
+            this.user.next(newData);
+            const expirationDuration = new Date(sekaikoData.expiration).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);
         }
     }
 

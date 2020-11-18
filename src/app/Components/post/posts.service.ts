@@ -44,7 +44,7 @@ export class PostsService {
           posts: [...this.posts],
           postCount: transformedPostData.maxPosts,
         });
-        console.log(transformedPostData.posts);
+        // console.log(transformedPostData.posts);
       });
   }
 
@@ -165,11 +165,7 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
-    return this.http.delete(BACKEND_URL + postId);
-    // .subscribe(() => {
-    //   const updatedPosts = this.posts.filter((post) => post.id !== postId);
-    //   this.posts = updatedPosts;
-    //   this.postsUpdated.next([...this.posts]);
-    // });
+    // console.log(localStorage.getItem("sekaikoData"));
+    return this.http.delete<{message: string}>(BACKEND_URL + postId);
   }
 }
