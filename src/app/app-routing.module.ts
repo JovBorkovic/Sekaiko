@@ -9,12 +9,14 @@ import { AccHomeComponent } from './Components/acc-home/acc-home.component';
 import { AuthGuard } from './Components/auth/auth.guard';
 import { AuthComponent } from './Components/auth/auth.component';
 import { PostCreateComponent } from './Components/post/post-create/post-create.component';
+import { PostComponent } from './Components/post/post.component';
 
 const route: Routes = [
   { path: '', redirectTo: '/home', pathMatch: "full" },
   { path: 'home', component: HomeComponent },
   { path: 'art', component: ArtComponent },
   { path: 'auth', component: AuthComponent},
+  { path: 'post/:id', component: PostComponent},
   { path: 'forum', component: ForumComponent , canActivate: [AuthGuard], children: [
     { path: ':forumId', component: ForumthreadComponent }
    ] },

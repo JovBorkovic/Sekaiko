@@ -32,6 +32,7 @@ export class PostsService {
                 id: post._id,
                 imagePath: post.imagePath,
                 creator: post.creator,
+                dateCreated: post.dateCreated
               };
             }),
             maxPosts: postData.maxPosts,
@@ -64,6 +65,7 @@ export class PostsService {
                 id: post._id,
                 imagePath: post.imagePath,
                 creator: post.creator,
+                dateCreated: post.dateCreated
               };
             }),
             maxPosts: postData.maxPosts,
@@ -76,7 +78,6 @@ export class PostsService {
           posts: [...this.posts],
           postCount: transformedPostData.maxPosts,
         });
-        console.log(transformedPostData.posts);
       });
   }
 
@@ -87,14 +88,15 @@ export class PostsService {
     return this.postsUpdated.asObservable();
   }
 
-  getPost(id: string) {
+  getPost(postId: string) {
     return this.http.get<{
       _id: string;
       title: string;
       content: string;
       imagePath: string;
       creator: string;
-    }>(BACKEND_URL + id);
+      dateCreated: Date;
+    }>(BACKEND_URL + "/post/" + postId);
   }
 
   getPostUser(userId: string) {
@@ -144,6 +146,7 @@ export class PostsService {
         content: content,
         imagePath: image,
         creator: null,
+        dateCreated: null
       };
     }
     this.http

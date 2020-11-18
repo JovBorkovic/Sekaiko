@@ -4,6 +4,7 @@ a {
 
 .wide-container{
     width: 100%;
+    height: 100%;
 }
 
 html, body {
@@ -20,5 +21,17 @@ html, body {
     height: 100%;
 }
 .wide-container mat-sidenav {
-    width: 250px;
+    width: 35%;
+}
+
+main {
+    height: 100%;
+}
+
+
+@media only screen and (max-width: 540px) {
+    
+    .wide-container mat-sidenav {
+        width: 50%;
+    }
 }

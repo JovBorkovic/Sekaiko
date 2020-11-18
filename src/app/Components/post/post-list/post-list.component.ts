@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -18,6 +18,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   //   { title: "Second Post", content: "This is the second post's content" },
   //   { title: "Third Post", content: "This is the third post's content" }
   // ];
+  @Input() neverAuth = false;
   posts: Post[] = [];
   isLoading = false;
   totalPosts = 0;
@@ -47,7 +48,6 @@ export class PostListComponent implements OnInit, OnDestroy {
     });
 
     if (this.router.url.includes("/acc-home")) {
-      console.log("we are in here");
       this.postsPerPage = 5;
       this.pageSizeOptions = [5];
       this.postsService.getCreatorPosts(
@@ -74,11 +74,15 @@ export class PostListComponent implements OnInit, OnDestroy {
     }
   }
 
+  openPost(post: Post) {
+    console.log(post);
+    this.router.navigate(['/post' , post.id]);
+  }
+
   onDelete(postId: string) {
     this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(
       res => {
-        console.log(res.message);
         if (this.router.url.includes("/acc-home")) {
           this.postsService.getCreatorPosts(
             this.userId,

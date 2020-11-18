@@ -6,12 +6,14 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { AuthService } from '../auth/auth.service';
 import { PostCreateComponent } from "./post-create/post-create.component";
 import { PostListComponent } from "./post-list/post-list.component";
+import { PostComponent } from "./post.component";
 import { PostsService } from './posts.service';
 
 @NgModule({
     declarations: [
         PostListComponent,
-        PostCreateComponent
+        PostCreateComponent,
+        PostComponent
     ],
     imports: [
         CommonModule,
@@ -21,7 +23,8 @@ import { PostsService } from './posts.service';
     ],
     exports: [
         PostListComponent,
-        PostCreateComponent
+        PostCreateComponent,
+        PostComponent
     ]
     ,
     providers:[PostsService, AuthService]

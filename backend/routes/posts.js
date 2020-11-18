@@ -24,9 +24,11 @@ router.put(
 
 router.get("",  PostsController.getPosts);
 
-router.get("/:id", PostsController.getCreatorsPosts)
 
-router.get("/:id", PostsController.getPost);
+router.get("/:id", PostsController.getCreatorsPosts);
+
+router.get("/post/:postId", PostsController.getPost);
+
 
 router.delete("/:id", checkAuth, PostsController.deletePost);
 

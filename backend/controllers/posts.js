@@ -2,8 +2,9 @@
 const Post = require("../models/post");
 
 exports.getPost = (req, res, next) => {
-    Post.findById(req.params.id).then((post) => {
+    Post.findById(req.params.postId).then((post) => {
       if (post) {
+        console.log(post);
         res.status(200).json(post);
       } else {
         res.status(404).json({ message: "Post not found!" });
@@ -40,8 +41,10 @@ exports.deletePost =  (req, res, next) => {
       content: req.body.content,
       imagePath: url + "/images/" + req.file.filename,
       //this value was made available by the checkAuth middleware
-      creator: req.userData.userId
+      creator: req.userData.userId,
+      dateCreated: new Date()
     });
+    console.log(post);
     post.save().then((createdPost) => {
       res.status(201).json({
         message: "Post added successfully",

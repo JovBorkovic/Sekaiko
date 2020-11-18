@@ -22,10 +22,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if(localStorage.getItem("sekaikoData")){
       this.authService.autoLogin();
-      this.userSub = this.authService.user.subscribe(user => {
-        this.isAuthenticated = !!user; //same as !user ? false: true;
-      });
     }
+    
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user; //same as !user ? false: true;
+    });
   }
 
   ngAfterContentChecked(): void {

@@ -25,10 +25,11 @@ export class UserComponent implements OnInit, AfterViewInit, OnDestroy, OnChange
 
   ngOnInit() {
     this.userSubs = this.authService.user.subscribe(user => {
-      this.username = user.username;
+      if(user){
+        this.username = user.username;
+        this.id = user.id;
+      }
       this.isAuthenticated = !!user;
-      this.id = user.id;
-      console.log(user.id);
     });
   }
   

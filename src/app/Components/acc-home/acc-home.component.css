@@ -82,7 +82,6 @@ seperate from the background image container for the users name
 .acc-body{
     width: auto;
     height: 40%;
-    display: flex;
 }
 .tab-links{
     position: absolute;
@@ -246,16 +245,14 @@ label for sections on acc page
 seperate from the background image container for the users name
 */
     .acc-body{
-        display:inline;
+        height: 60%;
     }
+
     .holder{
         width: 100%;
         height: auto;
         overflow-x: auto;
         overflow-y: auto;
-    }
-    .acc-body .section{
-        height: 300px;
     }
 /*
     ====================================     recent activity container.
@@ -277,7 +274,6 @@ seperate from the background image container for the users name
         height: 100%;
     }
     .account-image{
-        
         display: inline;
         height: 100%;
         width: 15%;

@@ -1,27 +1,30 @@
 
-          <div class="search">
-               <form>
-                  <div class="input-field">
-                    <input id="search" type="search" required>
-                    <label class="label-icon" for="search">
-                        <i class="material-icons">search</i>
-                      </label>
-                      <i class="material-icons">X</i>
-                   </div>
-              </form>
-          </div> 
-  
+<div class="DBlack_BG">
+<div class="search">
+              <form>
+                <div class="input-field">
+                  <input id="search" type="search" required>
+                  <label class="label-icon" for="search">
+                      <i class="material-icons">search</i>
+                    </label>
+                    <i class="material-icons">X</i>
+                  </div>
+            </form>
+        </div> 
+
           <app-parallax></app-parallax>
 
-          <div class="container center">
+          <div class="container center DBlack_BG">
             <div class="col s12">
               <label class="sectionLabel LtBlue_Text">Most Viewed This Week</label>
             </div>
   
           
           
-          <div class="col s12 center">
+          <div class="col s12 center DBlack_BG">
             <label class="sectionLabel LtBlue_Text">Recent Posts</label>
-            <app-post-list></app-post-list>
+            <app-post-list [neverAuth]=true></app-post-list>
           </div>
         </div>
+</div>
+
