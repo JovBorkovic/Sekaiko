@@ -1,44 +1,32 @@
-/*
-=========================================     ID
-*/
 
-/*the section looks*/
-#section .material-icons{
-    font-size: 25px;
-    color: #E3BE48;
-}
-
-
-/*
-========================================      Classes
-*/
-
-/*
---------------------      Section label customization
-*/
 .sectionLabel{
     font-size: 25px;
     font-weight: 600;
 }
 
-/*
---------------------       Container for thumbnails
-*/
+
 .imgContainer{
     width: 100%;
     padding: 0;
     height: auto;
 }
 
+
+#search{
+    width: 100%;
+    text-align: center;
+}
+
+.search {
+    margin-top: -15px;
+}
+
+
 /*
 ======================    Max screen width 320 px mobile-s     =========================
 */
 @media only screen and (max-width: 320px){
 /*ID's*/
-    #search{
-        width: 85%;
-        padding-left: 15%;
-    }
     
 /*Classes*/
     .sectionLabel{

@@ -1,21 +1,32 @@
-<div id="user">
-    <div class="col-sm-1 " *ngIf="!isAuthenticated">
-        <a class="modal-trigger" href="#modal2"><i class="material-icons LPink_Text">account_box</i></a>
+<div class="userInformation">
+    <div *ngIf="!isAuthenticated" class="loginLink">
+        <a [routerLink]="['/auth']"  href="#" >
+            <mat-grid-list cols="2" >
+                <mat-grid-tile>
+                    <mat-icon >login</mat-icon>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <p>Login</p>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </a>
     </div>
-    <div id="user-info" class="userinfohover" *ngIf="isAuthenticated" ngbDropdown>
-        <div class="row m-0 p-0" ngbDropdownToggle id="dropdownUser">
-            <div class="col-1">
-                <app-user-image></app-user-image>
-            </div>
-            <div class="col">
-                <p id="username" class="green p-0">
-                    Jovan Borkovic
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated" class="userButton" >
+        <mat-grid-list cols="4" >
+            <mat-grid-tile colspan="1">
+                <app-user-image class="valign-wrapper"></app-user-image>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="3" fxHide.lt-md>
+                <p class="LBlue_Text">
+                    {{username}}
                 </p>
-            </div>
-        </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </button>
 
-        <div ngbDropdownMenu aria-labelledby="dropdownUser">
-            <button ngbDropdownItem (click)="emitLogout()"> Logout </button>
-        </div>
-    </div>
+    
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="goMyHome()"> Home </button>
+        <button mat-menu-item (click)="emitLogout()"> Logout </button>
+    </mat-menu>
 </div>

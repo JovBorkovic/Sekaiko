@@ -3,7 +3,7 @@
         <div class="parallax">
             <div>
                 <div class="acc-name-bg">
-                    <div class="acc-name left White_Text"><i class="material-icons left">account_circle</i>Jovan Borkovic</div>
+                    <div class="acc-name left White_Text"><i class="material-icons left">account_circle</i>{{ username }}</div>
                 </div>
             </div>
 
@@ -42,20 +42,25 @@
             <i class="material-icons LPink_Text">settings</i>
         </div>
     </div>        
+
+    
 <!--
 =======   Account body
 -->
-    <div class="acc-body">
+    <div class="acc-body ">
+
+
         <div class="holder">
             <div id="tab-home" class="tab-content current">
                 <div class="section">
-                    <div class="Uploads">
-                        <label class="label LtBlue_Text">Uploads</label>
+                    <div>
+                        <label class="label LtBlue_Text">Uploads <button mat-icon-button class="LPink_Text" type="button" [routerLink]="['create']"><mat-icon>add_photo_alternate</mat-icon></button> </label>
+                        <app-post-list></app-post-list>
                     </div>
                 </div>
 
                 <div class="section">
-                    <div class="group">
+                    <div>
                         <label class="label LtBlue_Text">Group Activity</label>
                     </div>
                 </div>
@@ -65,7 +70,7 @@
 -->
             <div id="tab-image" class="tab-content">
                 <div class="section">
-                    <div class="collection">
+                    <div>
                         <label class="label LtBlue_Text">Collection</label>
                     </div>
                 </div>
@@ -75,7 +80,7 @@
 -->
             <div id="tab-group" class="tab-content">
                 <div class="section">
-                    <div class="groups">
+                    <div >
                         <label class="label LtBlue_Text">Groups</label>
                     </div>
                 </div>
@@ -85,7 +90,7 @@
 -->
             <div id="tab-settings" class="tab-content">
                 <div class="section">
-                    <div class="settings">
+                    <div >
                         <label class="label LtBlue_Text">Settings</label>
                         <div class="accordian">
 
@@ -95,51 +100,5 @@
             </div>
         </div>
 
-<!--
-====================================================       Container for holding recent activity notices
--->
-        <div class="recactivity_container z-depth-4 Monsterrat Blue_Text">
-            <div class="label center DtBlack_BG White_Text">Recent Posts</div>
-            <div class="recent_activity">
-                <div class="post">
-                    <div class="message White_BG right-align">
-                        <div id="post-dateTime" class="time">
-                            Tuesday, Feb 2, 2017 at 2:14 AM
-                        </div>
-                        <div class="text">
-                            Great day we're having
-                        </div>
-                    </div>
-                    <div class="account-image White_BG">
-                        <i class="material-icons">account_circle</i>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="message White_BG right-align">
-                        <div class="time">
-                            Tuesday, Feb 2, 2017 at 2:14 AM
-                        </div>
-                        <div class="text">
-                            Great day we're having
-                        </div>
-                    </div>
-                    <div class="account-image White_BG">
-                        <i class="material-icons">account_circle</i>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="message White_BG right-align">
-                        <div class="time">
-                            Tuesday, Feb 2, 2017 at 2:14 AM
-                        </div>
-                        <div class="text">
-                            Great day we're having
-                        </div>
-                    </div>
-                    <div class="account-image White_BG">
-                        <i class="material-icons">account_circle</i>
-                    </div>
-                </div>
-            </div>
-        </div>
 </div>
+

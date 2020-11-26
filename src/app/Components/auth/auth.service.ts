@@ -1,141 +1,165 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError , tap} from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Subject } from "rxjs";
+import { tap } from "rxjs/operators";
+import { User } from "./user.model";
 
-import { User } from './user.model';
-import { Router } from '@angular/router';
+import { environment } from "../../../environments/environment";
 
-export interface AuthResponseData {
-    kind: string;
-    idToken: string;
-    email: string;
-    refreshToken: string;
-    expiresIn: string;
-    localId: string;
-    registered?: boolean;
+const BACKEND_URL = environment.apiURL + "/user/";
+
+export interface ResponseData {
+  userId: string;
+  email: string;
+  username: string;
+  token: string;
+  expiresIn: string;
+}
+
+export interface AuthSentData {
+  email: string;
+  username: string;
+  password: string;
+}
+
+@Injectable({ providedIn: "root" })
+export class AuthService {
+  user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  createUser(email: string, username: string, password: string) {
+    const authData: AuthSentData = {
+      email: email,
+      username: username,
+      password: password,
+    };
+    return this.http.post<ResponseData>(BACKEND_URL + "signup", authData).pipe(
+      tap({
+        next: (responseData) => {
+          this.handleAuthentication(
+            responseData.email,
+            responseData.userId,
+            responseData.username,
+            responseData.token,
+            +responseData.expiresIn
+          );
+        },
+      })
+    );
   }
 
-@Injectable({ providedIn: 'root' })
-export class AuthService {
-    user = new BehaviorSubject<User>(null);
-    private tokenExpirationTimer: any;
+  //username is just placeholder. Will not function
+  login(email: string, username: string, password: string) {
+    const authData: AuthSentData = {
+      email: email,
+      username: username,
+      password: password,
+    };
+    return this.http.post<ResponseData>(BACKEND_URL + "/login", authData).pipe(
+      tap({
+        next: (responseData) => {
+          this.handleAuthentication(
+            responseData.email,
+            responseData.userId,
+            responseData.username,
+            responseData.token,
+            +responseData.expiresIn
+          );
+        },
+      })
+    );
+  }
 
-    constructor(private http: HttpClient, private router: Router) {}
 
-    signUp(email: string, username: string, password: string) {
-        // tslint:disable-next-line:max-line-length
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDKX5HA35NvN9W0ZxJPF8Q1BB_1O3vOVkY',
-        {
-            email: email,
-            password: password,
-            returnSecureToken: true,
-        }).pipe(catchError(this.handleError),
-            tap( resData => {
-                this.handleAuthentication( resData.email, resData.localId, resData.idToken, +resData.expiresIn );
-                this.createUser( email, username, resData.localId );
-            })
-        );
+  handleAuthentication(
+    email: string,
+    userId: string,
+    username: string,
+    token: string,
+    expiresIn: number
+  ) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(email, userId, username, token, expirationDate);
+    this.saveAuthData(token, expirationDate, userId, username, email);
+    this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+  }
+
+
+  logout() {
+    this.user.next(null);
+    clearTimeout(this.tokenExpirationTimer);
+    this.router.navigate(["/"]);
+    this.clearAuthData();
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
     }
+    this.tokenExpirationTimer = null;
+  }
 
-    createUser(
-        email: string,
-        userId: string,
-        username: string
-        ) {
 
+  autoLogin() {
+    this.getAuthData();
+  }
+
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
+
+  private getAuthData() {
+    const sekaikoData: {
+      email: string;
+      userId: string;
+      username: string;
+      token: string;
+      expiration: Date;
+    } = JSON.parse(localStorage.getItem("sekaikoData"));
+    if (!sekaikoData.token || !sekaikoData.expiration) {
+      return;
     }
-
-    login(email: string, password: string) {
-        // tslint:disable-next-line:max-line-length
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDKX5HA35NvN9W0ZxJPF8Q1BB_1O3vOVkY',
-            {
-                email: email,
-                password: password,
-                returnSecureToken: true,
-            }).pipe(catchError(this.handleError),
-                tap(resData => {
-                    this.handleAuthentication(
-                    resData.email,
-                    resData.localId,
-                    resData.idToken,
-                    +resData.expiresIn
-                    );
-            }));
+    const newData = new User(
+      sekaikoData.email,
+      sekaikoData.userId,
+      sekaikoData.username,
+      sekaikoData.token,
+      new Date(sekaikoData.expiration)
+    );
+    const now = new Date();
+    if (newData.token) {
+      this.user.next(newData);
+      const expirationDuration =
+        new Date(sekaikoData.expiration).getTime() - now.getTime();
+      this.autoLogout(expirationDuration);
     }
+  }
 
-    autoLogin() {
-        const userData: {
-            email: string;
-            id: string;
-            _token: string;
-            _tokenExpirationDate: string;
-        } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
-            return;
-        }
 
-        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+  private clearAuthData() {
+    localStorage.removeItem("sekaikoData");
+  }
 
-        if (loadedUser.token) {
-            this.user.next(loadedUser);
-            const expirationDuration = new Date(userData._tokenExpirationDate).getTime()
-                - new Date().getTime();
-            this.autoLogout(expirationDuration);
-        }
-    }
 
-    logout() {
-        this.user.next(null);
-        this.router.navigate(['/auth']);
-        localStorage.removeItem('userData');
-        if (this.tokenExpirationTimer) {
-            clearTimeout(this.tokenExpirationTimer);
-        }
-    }
-
-    autoLogout(expirationDuration: number) {
-        this.tokenExpirationTimer = setTimeout(() => {
-            this.logout();
-        }, expirationDuration);
-    }
-
-    private handleAuthentication(
-        email: string,
-        userId: string,
-        token: string,
-        expiresIn: number
-    ) {
-        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(
-            email,
-            userId,
-            token,
-            expirationDate
-            );
-        this.user.next(user);
-        this.autoLogout(expiresIn * 1000);
-
-        localStorage.setItem('userData', JSON.stringify(user));
-    }
-
-    private handleError(errorRes: HttpErrorResponse) {
-        let errorMessage = 'An Unknown error occurred!';
-        if (!errorRes.error || !errorRes.error.error) {
-        return throwError(errorMessage);
-        }
-        switch (errorRes.error.error.message) {
-            case 'EMAIL_EXISTS':
-                errorMessage = 'This email already exists';
-                break;
-            case 'EMAIL_NOT_FOUND':
-                errorMessage = 'This email already exists';
-                break;
-            case 'INVALID_PASSWORD':
-                errorMessage = 'This password is incorrect';
-                break;
-        }
-
-        return throwError(errorMessage);
-    }
+  private saveAuthData(
+    token: string,
+    expirationDate: Date,
+    userId: string,
+    username: string,
+    email: string
+  ) {
+    const sekaikoData = {
+      token: token,
+      expiration: expirationDate,
+      userId: userId,
+      username: username,
+      email: email,
+    };
+    localStorage.setItem("sekaikoData", JSON.stringify(sekaikoData));
+  }
 }

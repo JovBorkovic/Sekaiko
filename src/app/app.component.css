@@ -4,32 +4,42 @@ a {
 
 .wide-container{
     width: 100%;
+    height: 100%;
 }
 
 html, body {
     height: 100vh;
 }
 
-.wide-container .container {
-    padding: 40px 0px;
+/* makes the website take the entire height iof the screen */
+.fullHeight{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+.wide-container > .container {
+    padding: 0px;
     display: flex;
     justify-content: center;
 }
 
+ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+ mat-sidenav {
+    width: 35%;
+}
+mat-sidenav-content main {
+    height: 100%;
+}
 
-/*
-======================      Max screen width 1024px laptop size    =================
-*/
-@media only screen and (max-width: 1024px){
-/*  classes   */
+
+
+@media only screen and (max-width: 540px) {
     
-    nav i.material-icons{
-        font-size: 30px; /*this changes the size of the icon on the nav*/
-    }
-    
-/*Modal*/
-    .modal{
-        height: 80% !important;
-        width: 50% !important;
+    .wide-container mat-sidenav {
+        width: 50%;
     }
 }

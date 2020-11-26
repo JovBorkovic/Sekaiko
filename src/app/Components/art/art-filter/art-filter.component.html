@@ -1,45 +1,50 @@
 
-<div class="LtBlack_BG p-5">
-        <div class="row">
-            <div class="search col-sm-7">
-                    <form>
-                    <div class="input-field">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <i class="material-icons">X</i>
-                        </div>
-                </form>
-            </div>
-            <div class="col-sm-2  center">
-                <div class="btn LtPink_BG text-white">Search</div>
-            </div>
+<div class="LtBlack_BG">
+    <form>
+        <div fxFlex fxLayout class="input-field">
+            <input id="search" type="search" required>
+            <label class="label-icon" for="search">
+                <i class="material-icons">search</i>
+            </label>
+            <i class="material-icons">X</i>
         </div>
+        <mat-accordion >
+            <mat-expansion-panel hideToggle class="DBlack_BG ">
+                <mat-expansion-panel-header>
+                <mat-panel-title>
 
-        <div class="row">
-            <a class="col-12 LBlack_BG filter-label" data-toggle="collapse" href="#collapsefilter" role="button" aria-expanded="false" aria-controls="collapsefilter">
-                Filters
-            </a>
-        </div>
-        <div class="row">
-            <div class="collapse" id="collapsefilter">
-                <div class="row">
-                    <div class="col-sm-3 center">
-                        <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Dropdown button
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Environmental</a>
-                            <a class="dropdown-item" href="#">Landscape</a>
-                            <a class="dropdown-item" href="#">Paintings</a>
-                        </div>
-                      </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+                </mat-panel-title>
+                <mat-panel-description style="color: white !important;">
+                    Filters
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <section class="filter-section center">
+                    <span class="filter-list-section">
+                        <mat-checkbox class="filter-margin"
+                                        [checked]="allComplete"
+                                        [indeterminate]="someComplete()"
+                                        (change)="setAll($event.checked)">
+                            {{genres.name}}
+                        </mat-checkbox>
+                        </span>
+                    <span class="filter-list-section">
+                        <ul>
+                            <li *ngFor="let subtask of genres.subtasks">
+                            <mat-checkbox [(ngModel)]="subtask.completed"
+                                            [color]="subtask.color"
+                                            (ngModelChange)="updateAllComplete()">
+                                {{subtask.name}}
+                            </mat-checkbox>
+                            </li>
+                        </ul>
+                    </span>
+                </section>
+                
+            </mat-expansion-panel>
+        </mat-accordion>
+        <button   mat-button type="submit" class="DPink_BG">Submit</button>
+
         
+    </form>
 </div>
