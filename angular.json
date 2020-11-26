@@ -123,6 +123,10 @@
               "devServerTarget": "artapp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
