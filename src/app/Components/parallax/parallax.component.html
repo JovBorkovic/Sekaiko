@@ -3,6 +3,6 @@
 <!--transparent film over parallax-->
     <div class="overLap">
         <!--Sign up button-->
-        <a class="btn LPink_Text White_BG waves-effect waves-light modal-trigger pulse" *ngIf="isAuthenticated" [routerLink]="['/auth']">Sign Up</a>
+        <a class="btn LPink_Text White_BG waves-effect waves-light modal-trigger pulse" *ngIf="!isAuthenticated" [routerLink]="['/auth']">Sign Up</a>
     </div>
 </div>    

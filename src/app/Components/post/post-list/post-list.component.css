@@ -1,3 +1,16 @@
+
+mat-paginator{
+    margin-top: 1rem;
+}
+
+mat-action-row {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    height: 10%;
+}
+
 :host {
     display: block;
     margin-top: 1rem;
@@ -7,31 +20,13 @@
     text-align: center;
 }
 
-.post-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-
-.post-image{
-    max-width: 20%;
-    height: 100%;
-}
-.post-image:hover {
-    cursor: pointer;
-}
-
-.post-image img{
+.img{
     max-height: 100%;
-    max-width: 100%;
-    display: block;
 }
 
-mat-paginator{
-    margin-top: 1rem;
+mat-grid-list {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0px;
 }
 
-mat-action-row {
-    display: inline;
-}

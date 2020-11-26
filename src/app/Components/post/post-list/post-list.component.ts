@@ -1,11 +1,20 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input, APP_INITIALIZER, HostListener } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthService } from "../../auth/auth.service";
 
+import * as $ from 'jquery'; 
+
 import { Post } from "../post.model";
 import { PostsService } from "../posts.service";
+
+export interface Tile {
+  color?: string;
+  cols: number;
+  rows: number;
+  text?: string;
+}
 
 @Component({
   selector: "app-post-list",
@@ -30,6 +39,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   private postsSub: Subscription;
   private authStatusSub: Subscription;
 
+  public innerWidth: any;
+  public tileRowHeight;
+  
   constructor(
     public postsService: PostsService,
     private authService: AuthService,
@@ -37,6 +49,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    
+    this.innerWidth = window.innerWidth;
+    this.tileRowHeight=  innerWidth < 1100 ? 100: 200;
     this.isLoading = true;
 
     this.authStatusSub = this.authService.user.subscribe((user) => {
@@ -73,6 +88,15 @@ export class PostListComponent implements OnInit, OnDestroy {
         });
     }
   }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    this.tileRowHeight=  innerWidth < 1100 ? 100: 200;
+  }
+
+
 
   openPost(post: Post) {
     console.log(post);
@@ -123,4 +147,6 @@ export class PostListComponent implements OnInit, OnDestroy {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);
     }
   }
+
+
 }

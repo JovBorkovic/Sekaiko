@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.userSubs = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user;
-    })
+    });
     this.stretchParallax();
   }
 
@@ -47,6 +47,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     });
   }
+
+  
 
   logOut() {
     this.authService.logout();

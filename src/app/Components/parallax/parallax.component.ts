@@ -14,7 +14,7 @@ export class ParallaxComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubs = this.authService.user.subscribe(user => {
-      this.isAuthenticated = !!!user;
+      this.isAuthenticated = !!user;
     })
   }
 

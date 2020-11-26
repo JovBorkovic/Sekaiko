@@ -1,4 +1,4 @@
-<div class="wide-container">
+<div class="fullHeight DBlack_BG">
     <mat-sidenav-container>
         <mat-sidenav #sidenav role="navigation">
           
@@ -18,10 +18,10 @@
             </a>
           </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content class="DBlack_BG">
             <app-navbar (sidenavToggle)="sidenav.toggle()" (loggingOut)="logOut()" ></app-navbar>
           <!--in here all the content must reside. We will add a navigation header as well-->
-          <main class="DBlack_BG">
+          <main>
             <router-outlet></router-outlet>
           </main>
         </mat-sidenav-content>

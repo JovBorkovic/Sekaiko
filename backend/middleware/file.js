@@ -1,5 +1,8 @@
 const multer = require("multer");
 
+//image files size, last calculation makes however many MB of data
+const fsImageLimit = 1 * 1000 * 5; // 5MB file size
+
 const MIME_TYPE_MAP = {
     "image/png": "png",
     "image/jpeg": "jpg",
@@ -25,4 +28,4 @@ const MIME_TYPE_MAP = {
     }
   });
 
-module.exports = multer({ storage: storage }).single("image");
+module.exports = multer({ storage: storage , limits: fsImageLimit}).single("image");

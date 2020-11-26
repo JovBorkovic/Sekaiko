@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Router } from '@angular/router';
 import { Observable, Subscription } from "rxjs";
 import { AuthService, ResponseData } from "./auth.service";
+import { Router } from '@angular/router';
 
 
 @Component({
     selector: 'app-auth-component',
     templateUrl: './auth.component.html',
-    styles: [' mat-form-field { margin: auto; width: 100%;}', '  mat-spinner { width: auto; } ' ]
+    styleUrls: ['./auth.component.css' ]
 }) export class AuthComponent implements OnInit, OnDestroy{
     isLoading = false;
     isLoginMode = true;
     error: string = null;
-    private authStatusSub: Subscription;
+    private authObs: Subscription;
 
     constructor(private authService: AuthService, private router: Router) {}
 
@@ -28,9 +28,7 @@ import { AuthService, ResponseData } from "./auth.service";
     }
 
     ngOnInit() {
-        this.authStatusSub = this.authService.user.subscribe( user => {
-            this.isLoading = !!user;
-        });
+
     }
 
     onSubmit(form: NgForm) {
@@ -50,7 +48,8 @@ import { AuthService, ResponseData } from "./auth.service";
         }
 
         authObs.subscribe( () => {
-            this.router.navigate["/"];
+            // do something after the user signed in or logged in
+            this.router.navigate(["/"]);
         }, error => {
             this.isLoading = false;
         });
@@ -64,7 +63,7 @@ import { AuthService, ResponseData } from "./auth.service";
 
     
     ngOnDestroy() {
-        this.authStatusSub.unsubscribe();
+        //this.authStatusSub.unsubscribe();
     }
 }
  

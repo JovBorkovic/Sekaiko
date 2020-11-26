@@ -1,58 +1,61 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form *ngIf="!isLoading" (submit)="onSubmit(authForm)" #authForm="ngForm">
-  <mat-card-title>{{ isLoginMode ? "Login" : "Sign Up" }} </mat-card-title>
-    <mat-form-field>
-      <input
-        matInput
-        type="email"
-        placeholder="E-Mail"
-        name="email"
-        ngModel
-        #emailInput="ngModel"
-        required
-        email
-      />
-      <mat-error *ngIf="emailInput.invalid">Please enter a valid E-Mail.</mat-error>
-    </mat-form-field>
-
-    
-    <mat-form-field *ngIf="!isLoginMode">
-      <input
-        matInput
-        type="username"
-        placeholder="Username"
-        name="username"
-        ngModel
-        #usernameInput="ngModel"
-        required
-        maxlength="16"
-        minlength="3"
-      />
-      <mat-error *ngIf="usernameInput.invalid">A username is required.</mat-error>
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input
-        matInput
-        type="password"
-        name="content"
-        placeholder="Password"
-        ngModel
-        name="password"
-        #passwordInput="ngModel"
-        required
-        password
-        minlength="6"
-      />
-      <mat-error *ngIf="passwordInput.invalid">Please enter a valid Password.</mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading" [disabled]="!authForm.valid"> {{ isLoginMode ? "Login" : "Sign Up" }}</button>
-
-    <button mat-raised-button color="accent" type="button" (click)="onSwitchMode()"> switch to {{ !isLoginMode ? "Login" : "Sign Up" }}</button>
-      
+<div class="login valign-wrapper ">
+  <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-  </form>
-</mat-card>
+    <form *ngIf="!isLoading" (submit)="onSubmit(authForm)" #authForm="ngForm">
+    <mat-card-title>{{ isLoginMode ? "Login" : "Sign Up" }} </mat-card-title>
+      <mat-form-field>
+        <input
+          matInput
+          type="email"
+          placeholder="E-Mail"
+          name="email"
+          ngModel
+          #emailInput="ngModel"
+          required
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid">Please enter a valid E-Mail.</mat-error>
+      </mat-form-field>
   
+      
+      <mat-form-field *ngIf="!isLoginMode">
+        <input
+          matInput
+          type="username"
+          placeholder="Username"
+          name="username"
+          ngModel
+          #usernameInput="ngModel"
+          required
+          maxlength="16"
+          minlength="3"
+        />
+        <mat-error *ngIf="usernameInput.invalid">A username is required.</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          name="content"
+          placeholder="Password"
+          ngModel
+          name="password"
+          #passwordInput="ngModel"
+          required
+          password
+          minlength="6"
+        />
+        <mat-error *ngIf="passwordInput.invalid">Please enter a valid Password.</mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading" [disabled]="!authForm.valid"> {{ isLoginMode ? "Login" : "Sign Up" }}</button>
+  
+      <button mat-raised-button color="accent" type="button" (click)="onSwitchMode()"> switch to {{ !isLoginMode ? "Login" : "Sign Up" }}</button>
+        
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+  </mat-card>
+</div>
+ 
+

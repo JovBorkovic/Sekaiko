@@ -1,29 +1,10 @@
-/*
-=========================================     ID
-*/
 
-/*the section looks*/
-#section .material-icons{
-    font-size: 25px;
-    color: #E3BE48;
-}
-
-
-/*
-========================================      Classes
-*/
-
-/*
---------------------      Section label customization
-*/
 .sectionLabel{
     font-size: 25px;
     font-weight: 600;
 }
 
-/*
---------------------       Container for thumbnails
-*/
+
 .imgContainer{
     width: 100%;
     padding: 0;

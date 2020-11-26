@@ -8,32 +8,43 @@
             </label>
             <i class="material-icons">X</i>
         </div>
+        <mat-accordion >
+            <mat-expansion-panel hideToggle class="DBlack_BG ">
+                <mat-expansion-panel-header>
+                <mat-panel-title>
+
+                </mat-panel-title>
+                <mat-panel-description style="color: white !important;">
+                    Filters
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <section class="filter-section center">
+                    <span class="filter-list-section">
+                        <mat-checkbox class="filter-margin"
+                                        [checked]="allComplete"
+                                        [indeterminate]="someComplete()"
+                                        (change)="setAll($event.checked)">
+                            {{genres.name}}
+                        </mat-checkbox>
+                        </span>
+                    <span class="filter-list-section">
+                        <ul>
+                            <li *ngFor="let subtask of genres.subtasks">
+                            <mat-checkbox [(ngModel)]="subtask.completed"
+                                            [color]="subtask.color"
+                                            (ngModelChange)="updateAllComplete()">
+                                {{subtask.name}}
+                            </mat-checkbox>
+                            </li>
+                        </ul>
+                    </span>
+                </section>
+                
+            </mat-expansion-panel>
+        </mat-accordion>
         <button   mat-button type="submit" class="DPink_BG">Submit</button>
+
+        
     </form>
-
-<mat-accordion >
-    <mat-expansion-panel hideToggle class="DBlack_BG ">
-        <mat-expansion-panel-header>
-        <mat-panel-title>
-
-        </mat-panel-title>
-        <mat-panel-description style="color: white !important;">
-            Filters
-        </mat-panel-description>
-        </mat-expansion-panel-header>
-            <div class="s3 center">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Environmental</a>
-                        <a class="dropdown-item" href="#">Landscape</a>
-                        <a class="dropdown-item" href="#">Paintings</a>
-                    </div>
-                </div>
-            </div>
-    </mat-expansion-panel>
-</mat-accordion>
-
 </div>

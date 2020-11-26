@@ -131,61 +131,7 @@ label for sections on acc page
 
 
 
-/*
-====================================     recent activity container.
-*/
-/*
----------------holds the recent activity messages
-*/
-.recactivity_container{
-    flex: 1;
-    margin-bottom: 7%;
-    overflow: hidden;
-}
-.recactivity_container .label{
-    font-size: 20px;
-    padding: 5px;
-    letter-spacing: 5px;
-    font-weight: 600;
-    text-shadow:
-    -1px -1px 0 #2469BB,  
-    1px -1px 0 #2469BB,
-    -1px 1px 0 #2469BB,
-    1px 1px 0 #2469BB;
-}
-.recent_activity{
-    max-height: 1000px;
-    height: 100%;
-}
-.recent_activity:last-child{
-    border-bottom: 0px;
-}
 
-.post{
-    height: 20%;
-    display: flex;
-}
-.account-image{
-    width: 15%;
-    margin: auto 0 auto -15%;
-    z-index: 1;
-}
-.account-image > .material-icons{
-    font-size: 65px;
-}
-.message{
-    display: inline-block;
-    width: 100%;
-    z-index: 2;
-}
-.message:hover{
-    animation: slide 0.3s forwards;
-    animation-delay: 200ms;
-}
-.message .time{
-    font-size: 10px;
-    color: grey;
-}
 
 
 
@@ -225,12 +171,6 @@ label for sections on acc page
     }
 }
 
-
-@keyframes slide {
-    100% {transform: translateX(-15%);}
-}
-
-
 /*
 ================================================ Screen size (1024px)
 */
@@ -260,32 +200,6 @@ seperate from the background image container for the users name
 /*
 ---------------holds the recent activity messages
 */
-    .recactivity_container{
-        width: 100%;
-        border-radius: 0%;
-        padding-bottom: 5px;
-    }
-    .recactivity_container .label{
-        padding: 10px;
-        letter-spacing: 5px;
-    }
-    .recent_activity{
-        border-bottom: 1px solid #FFF;
-        height: 100%;
-    }
-    .account-image{
-        display: inline;
-        height: 100%;
-        width: 15%;
-        margin-left: 0;
-        z-index: 1;
-    }
-    .message {
-        animation: none;
-    }
-    .message:hover {
-        animation: none;
-    }
 }
 
 /*
