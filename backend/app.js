@@ -20,10 +20,10 @@ mongoose.connect(
      "@meanstackcluster.xbajk.mongodb.net/Sekaiko?retryWrites=true&w=majority"
     )
     .then(() => {
-    console.log("Connected to database!");
+      console.log("Connected to database!");
     })
-    .catch(() => {
-    console.log("Connection failed!");
+    .catch( err => {
+      console.error( "Connection Failed : \n",'App starting error:', err.stack);
     });
 
 app.use(bodyParser.json());
